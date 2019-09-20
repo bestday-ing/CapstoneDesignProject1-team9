@@ -6,12 +6,17 @@
 #
 # WARNING! All changes made in this file will be lost!
 
+from PyQt5.QtGui import QPalette, QBrush, QColor, QFont
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import QPoint, Qt, pyqtSlot
+
 global ui
 
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
+#MainWINDOW
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1094, 683)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
@@ -28,17 +33,29 @@ class Ui_MainWindow(object):
 "")
         MainWindow.setSizeGripEnabled(False)
         MainWindow.setModal(False)
+        s= QStyleFactory.create('Fusion')
+
+
         self.CopyrightLabel = QtWidgets.QLabel(MainWindow)
         self.CopyrightLabel.setGeometry(QtCore.QRect(440, 650, 241, 21))
         font = QtGui.QFont()
         font.setFamily("휴먼모음T")
         self.CopyrightLabel.setFont(font)
         self.CopyrightLabel.setObjectName("CopyrightLabel")
+
+
+
         self.MainStack = QtWidgets.QStackedWidget(MainWindow)
         self.MainStack.setGeometry(QtCore.QRect(70, 10, 1021, 631))
         self.MainStack.setObjectName("MainStack")
+
+
+#PAGE 1
         self.page1 = QtWidgets.QWidget()
         self.page1.setObjectName("page1")
+
+
+
         self.MainLogoLabel = QtWidgets.QLabel(self.page1)
         self.MainLogoLabel.setGeometry(QtCore.QRect(370, 210, 211, 51))
         font = QtGui.QFont()
@@ -52,6 +69,9 @@ class Ui_MainWindow(object):
         self.MainLogoLabel.setFrameShadow(QtWidgets.QFrame.Plain)
         self.MainLogoLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.MainLogoLabel.setObjectName("MainLogoLabel")
+
+
+
         self.SearchButton = QtWidgets.QPushButton(self.page1)
         self.SearchButton.setGeometry(QtCore.QRect(570, 350, 81, 33))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Fixed)
@@ -59,6 +79,7 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.SearchButton.sizePolicy().hasHeightForWidth())
         self.SearchButton.setSizePolicy(sizePolicy)
+
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -114,6 +135,9 @@ class Ui_MainWindow(object):
         self.SearchButton.setFont(font)
         self.SearchButton.setStyleSheet("background-color: rgb(0, 85, 127);")
         self.SearchButton.setObjectName("SearchButton")
+
+
+
         self.SearchTextEdit = QtWidgets.QPlainTextEdit(self.page1)
         self.SearchTextEdit.setGeometry(QtCore.QRect(230, 351, 341, 31))
         self.SearchTextEdit.setAcceptDrops(True)
@@ -123,9 +147,18 @@ class Ui_MainWindow(object):
         self.SearchTextEdit.setLineWidth(1)
         self.SearchTextEdit.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.SearchTextEdit.setObjectName("SearchTextEdit")
+
+
+
         self.MainStack.addWidget(self.page1)
+
+
+#Page2
         self.page2 = QtWidgets.QWidget()
         self.page2.setObjectName("page2")
+
+
+
         self.Editbox2 = QtWidgets.QLineEdit(self.page2)
         self.Editbox2.setGeometry(QtCore.QRect(200, 0, 331, 31))
         palette = QtGui.QPalette()
@@ -157,8 +190,12 @@ class Ui_MainWindow(object):
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Window, brush)
         self.Editbox2.setPalette(palette)
-        self.Editbox2.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.Editbox2.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+"font: 12pt \"배달의민족 도현\";")
         self.Editbox2.setObjectName("Editbox2")
+
+
+
         self.SearchButton2 = QtWidgets.QPushButton(self.page2)
         self.SearchButton2.setGeometry(QtCore.QRect(530, 0, 151, 31))
         palette = QtGui.QPalette()
@@ -204,6 +241,9 @@ class Ui_MainWindow(object):
         self.SearchButton2.setFont(font)
         self.SearchButton2.setStyleSheet("background-color: rgb(0, 85, 127);")
         self.SearchButton2.setObjectName("SearchButton2")
+
+
+
         self.MonthlyLabel = QtWidgets.QLabel(self.page2)
         self.MonthlyLabel.setGeometry(QtCore.QRect(90, 51, 301, 20))
         font = QtGui.QFont()
@@ -213,14 +253,21 @@ class Ui_MainWindow(object):
         self.MonthlyLabel.setStyleSheet("background-color: rgb(243, 251, 255);")
         self.MonthlyLabel.setWordWrap(False)
         self.MonthlyLabel.setObjectName("MonthlyLabel")
+
+
+
         self.AnnuallyLabel = QtWidgets.QLabel(self.page2)
-        self.AnnuallyLabel.setGeometry(QtCore.QRect(400, 40, 271, 41))
+        self.AnnuallyLabel.setGeometry(QtCore.QRect(420, 40, 271, 41))
         font = QtGui.QFont()
         font.setFamily("Castellar")
         font.setPointSize(14)
         self.AnnuallyLabel.setFont(font)
         self.AnnuallyLabel.setStyleSheet("background-color: rgb(243, 251, 255);")
         self.AnnuallyLabel.setObjectName("AnnuallyLabel")
+
+
+
+
         self.MonLCD = QtWidgets.QLCDNumber(self.page2)
         self.MonLCD.setGeometry(QtCore.QRect(90, 80, 231, 71))
         palette = QtGui.QPalette()
@@ -370,6 +417,10 @@ class Ui_MainWindow(object):
         self.MonLCD.setMode(QtWidgets.QLCDNumber.Oct)
         self.MonLCD.setProperty("intValue", 1233)
         self.MonLCD.setObjectName("MonLCD")
+
+
+
+
         self.AnnLCD = QtWidgets.QLCDNumber(self.page2)
         self.AnnLCD.setGeometry(QtCore.QRect(420, 80, 221, 71))
         palette = QtGui.QPalette()
@@ -516,6 +567,10 @@ class Ui_MainWindow(object):
         self.AnnLCD.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.AnnLCD.setProperty("intValue", 9999)
         self.AnnLCD.setObjectName("AnnLCD")
+
+
+
+
         self.RecomLabel = QtWidgets.QLabel(self.page2)
         self.RecomLabel.setGeometry(QtCore.QRect(730, 50, 191, 41))
         font = QtGui.QFont()
@@ -524,6 +579,10 @@ class Ui_MainWindow(object):
         self.RecomLabel.setFont(font)
         self.RecomLabel.setStyleSheet("background-color: rgb(243, 251, 255);")
         self.RecomLabel.setObjectName("RecomLabel")
+
+
+
+
         self.RecomProgressBar = QtWidgets.QProgressBar(self.page2)
         self.RecomProgressBar.setGeometry(QtCore.QRect(730, 100, 181, 31))
         palette = QtGui.QPalette()
@@ -665,36 +724,89 @@ class Ui_MainWindow(object):
         self.RecomProgressBar.setPalette(palette)
         self.RecomProgressBar.setProperty("value", 80)
         self.RecomProgressBar.setObjectName("RecomProgressBar")
+
+
+
+
         self.tabWidget = QtWidgets.QTabWidget(self.page2)
         self.tabWidget.setGeometry(QtCore.QRect(0, 160, 971, 441))
         self.tabWidget.setObjectName("tabWidget")
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift")
+        self.tabWidget.setFont(font)
+
+
+
         self.tab1 = QtWidgets.QWidget()
         self.tab1.setObjectName("tab1")
+
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift")
+        self.tab1.setFont(font)
+
+
+
         self.NDataInfo = QtWidgets.QLabel(self.tab1)
-        self.NDataInfo.setGeometry(QtCore.QRect(0, 356, 961, 61))
+        self.NDataInfo.setGeometry(QtCore.QRect(0, 352, 961, 61))
         self.NDataInfo.setAlignment(QtCore.Qt.AlignCenter)
         self.NDataInfo.setObjectName("NDataInfo")
+        font = QtGui.QFont()
+        font.setFamily("배달의민족 도현")
+        font.setPointSize(12)
+        self.NDataInfo.setFont(font)
+
+
+
         self.NGraphLabel = QtWidgets.QLabel(self.tab1)
         self.NGraphLabel.setGeometry(QtCore.QRect(1, 61, 71, 21))
         self.NGraphLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.NGraphLabel.setObjectName("NGraphLabel")
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift")
+        self.NGraphLabel.setFont(font)
+
+
+
+
         self.NGraphView = QtWidgets.QGraphicsView(self.tab1)
         self.NGraphView.setGeometry(QtCore.QRect(0, 60, 611, 291))
         self.NGraphView.setObjectName("NGraphView")
+
+
+
+
         self.NRelatedGraphicView = QtWidgets.QGraphicsView(self.tab1)
         self.NRelatedGraphicView.setGeometry(QtCore.QRect(610, 60, 351, 291))
         self.NRelatedGraphicView.setObjectName("NRelatedGraphicView")
+
+
+
         self.NListView = QtWidgets.QListView(self.tab1)
         self.NListView.setGeometry(QtCore.QRect(0, 0, 961, 61))
         self.NListView.setObjectName("NListView")
+
+
+
+
         self.NComparisonLabel = QtWidgets.QLabel(self.tab1)
         self.NComparisonLabel.setGeometry(QtCore.QRect(622, 65, 71, 21))
         self.NComparisonLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.NComparisonLabel.setObjectName("NComparisonLabel")
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift")
+        self.NComparisonLabel.setFont(font)
+
+
+
         self.NRelatedLabel = QtWidgets.QLabel(self.tab1)
         self.NRelatedLabel.setGeometry(QtCore.QRect(4, 4, 71, 21))
         self.NRelatedLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.NRelatedLabel.setObjectName("NRelatedLabel")
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift")
+        self.NRelatedLabel.setFont(font)
+
+
         self.NGraphView.raise_()
         self.NDataInfo.raise_()
         self.NGraphLabel.raise_()
@@ -702,34 +814,76 @@ class Ui_MainWindow(object):
         self.NListView.raise_()
         self.NComparisonLabel.raise_()
         self.NRelatedLabel.raise_()
+
         self.tabWidget.addTab(self.tab1, "")
+
+
         self.tab2 = QtWidgets.QWidget()
         self.tab2.setObjectName("tab2")
+
+
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift")
+        self.tab2.setFont(font)
+
+
         self.GDataInfo = QtWidgets.QLabel(self.tab2)
-        self.GDataInfo.setGeometry(QtCore.QRect(0, 356, 961, 61))
+        self.GDataInfo.setGeometry(QtCore.QRect(0, 352, 961, 61))
         self.GDataInfo.setAlignment(QtCore.Qt.AlignCenter)
         self.GDataInfo.setObjectName("GDataInfo")
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setFamily("배달의민족 도현")
+        self.GDataInfo.setFont(font)
+
+
+
         self.GListView = QtWidgets.QListView(self.tab2)
         self.GListView.setGeometry(QtCore.QRect(0, 0, 961, 61))
         self.GListView.setObjectName("GListView")
+
+
+
         self.GComparisonLabel = QtWidgets.QLabel(self.tab2)
         self.GComparisonLabel.setGeometry(QtCore.QRect(622, 65, 71, 21))
         self.GComparisonLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.GComparisonLabel.setObjectName("GComparisonLabel")
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift")
+        self.GComparisonLabel.setFont(font)
+
+
+
         self.GGraphView = QtWidgets.QGraphicsView(self.tab2)
         self.GGraphView.setGeometry(QtCore.QRect(0, 60, 611, 291))
         self.GGraphView.setObjectName("GGraphView")
+
+
+
         self.GRelatedGraphView = QtWidgets.QGraphicsView(self.tab2)
         self.GRelatedGraphView.setGeometry(QtCore.QRect(610, 60, 351, 291))
         self.GRelatedGraphView.setObjectName("GRelatedGraphView")
+
+
+
         self.GGraphLabel = QtWidgets.QLabel(self.tab2)
         self.GGraphLabel.setGeometry(QtCore.QRect(1, 61, 71, 21))
         self.GGraphLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.GGraphLabel.setObjectName("GGraphLabel")
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift")
+        self.GGraphLabel.setFont(font)
+
+
         self.GRelatedLabel = QtWidgets.QLabel(self.tab2)
         self.GRelatedLabel.setGeometry(QtCore.QRect(4, 4, 71, 21))
         self.GRelatedLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.GRelatedLabel.setObjectName("GRelatedLabel")
+        font = QtGui.QFont()
+        font.setFamily("Bahnschrift")
+        self.GRelatedLabel.setFont(font)
+
+
         self.GRelatedGraphView.raise_()
         self.GDataInfo.raise_()
         self.GListView.raise_()
@@ -737,14 +891,24 @@ class Ui_MainWindow(object):
         self.GGraphView.raise_()
         self.GGraphLabel.raise_()
         self.GRelatedLabel.raise_()
+
+
+
         self.tabWidget.addTab(self.tab2, "")
+
+
         self.HomeButton = QtWidgets.QPushButton(self.page2)
-        self.HomeButton.setGeometry(QtCore.QRect(0, -6, 61, 51))
+        self.HomeButton.setGeometry(QtCore.QRect(0, 0, 61, 51))
         font = QtGui.QFont()
         font.setFamily("Bahnschrift")
         self.HomeButton.setFont(font)
         self.HomeButton.setObjectName("HomeButton")
+
+
+
         self.MainStack.addWidget(self.page2)
+
+
         self.JJImageLabel = QtWidgets.QLabel(MainWindow)
         self.JJImageLabel.setGeometry(QtCore.QRect(908, 4, 50, 50))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Maximum)
@@ -757,6 +921,9 @@ class Ui_MainWindow(object):
         self.JJImageLabel.setPixmap(QtGui.QPixmap("KakaoTalk_20190909_211231059.jpg"))
         self.JJImageLabel.setScaledContents(True)
         self.JJImageLabel.setObjectName("JJImageLabel")
+
+
+
         self.KNUImageLabel = QtWidgets.QLabel(MainWindow)
         self.KNUImageLabel.setEnabled(False)
         self.KNUImageLabel.setGeometry(QtCore.QRect(0, 1, 60, 50))
@@ -772,8 +939,18 @@ class Ui_MainWindow(object):
         self.KNUImageLabel.setScaledContents(True)
         self.KNUImageLabel.setObjectName("KNUImageLabel")
 
+        self.SearchButton.setStyle(s)
+        self.HomeButton.setStyle(s)
+        self.SearchTextEdit.setStyle(s)
+        self.Editbox2.setStyle(s)
+        self.RecomProgressBar.setStyle(s)
+        self.SearchButton2.setStyle(s)
+        self.tab1.setStyle(s)
+        self.tab2.setStyle(s)
+        self.tabWidget.setStyle(s)
 
 
+#connect
         self.SearchButton.clicked.connect(SearchBt_pushed)
         self.HomeButton.clicked.connect(HomeBt_pushed)
         self.retranslateUi(MainWindow)
@@ -803,11 +980,16 @@ class Ui_MainWindow(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab2), _translate("MainWindow", "Google"))
         self.HomeButton.setText(_translate("MainWindow", "Home"))
 
+
+#EVENT LISTENER
 def SearchBt_pushed(self):
         ui.MainStack.setCurrentIndex(1)
 def HomeBt_pushed(self):
         ui.MainStack.setCurrentIndex(0)
 
+
+
+#MAIN
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)

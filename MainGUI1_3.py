@@ -6,12 +6,14 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5.QtGui import QPalette, QBrush, QColor, QFont
+from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
-from PyQt5.QtCore import QPoint, Qt, pyqtSlot
+
 
 global ui
+#global SearchTextEdit
+global keyword
 
 
 class Ui_MainWindow(object):
@@ -157,10 +159,12 @@ class Ui_MainWindow(object):
         self.page2 = QtWidgets.QWidget()
         self.page2.setObjectName("page2")
 
-
-
-        self.Editbox2 = QtWidgets.QLineEdit(self.page2)
-        self.Editbox2.setGeometry(QtCore.QRect(200, 0, 331, 31))
+        self.SearchTextEdit2 = QtWidgets.QPlainTextEdit(self.page2)
+        self.SearchTextEdit2.setGeometry(QtCore.QRect(200, 0, 331, 31))
+        self.SearchTextEdit2.setAcceptDrops(True)
+        self.SearchTextEdit2.setAutoFillBackground(False)
+        self.SearchTextEdit2.setLineWidth(1)
+        self.SearchTextEdit2.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -189,10 +193,45 @@ class Ui_MainWindow(object):
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Window, brush)
-        self.Editbox2.setPalette(palette)
-        self.Editbox2.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+        self.SearchTextEdit2.setPalette(palette)
+        self.SearchTextEdit2.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "font: 12pt \"배달의민족 도현\";")
-        self.Editbox2.setObjectName("Editbox2")
+        self.SearchTextEdit2.setObjectName("SearchTextEdit2")
+
+#         self.Editbox2 = QtWidgets.QLineEdit(self.page2)
+#         self.Editbox2.setGeometry(QtCore.QRect(200, 0, 331, 31))
+#         palette = QtGui.QPalette()
+#         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+#         brush.setStyle(QtCore.Qt.SolidPattern)
+#         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Button, brush)
+#         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+#         brush.setStyle(QtCore.Qt.SolidPattern)
+#         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Base, brush)
+#         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+#         brush.setStyle(QtCore.Qt.SolidPattern)
+#         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Window, brush)
+#         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+#         brush.setStyle(QtCore.Qt.SolidPattern)
+#         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Button, brush)
+#         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+#         brush.setStyle(QtCore.Qt.SolidPattern)
+#         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Base, brush)
+#         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+#         brush.setStyle(QtCore.Qt.SolidPattern)
+#         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Window, brush)
+#         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+#         brush.setStyle(QtCore.Qt.SolidPattern)
+#         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Button, brush)
+#         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+#         brush.setStyle(QtCore.Qt.SolidPattern)
+#         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Base, brush)
+#         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+#         brush.setStyle(QtCore.Qt.SolidPattern)
+#         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Window, brush)
+#         self.Editbox2.setPalette(palette)
+#         self.Editbox2.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+# "font: 12pt \"배달의민족 도현\";")
+#         self.Editbox2.setObjectName("Editbox2")
 
 
 
@@ -729,7 +768,7 @@ class Ui_MainWindow(object):
 
 
         self.tabWidget = QtWidgets.QTabWidget(self.page2)
-        self.tabWidget.setGeometry(QtCore.QRect(0, 160, 971, 441))
+        self.tabWidget.setGeometry(QtCore.QRect(0, 160, 971, 470))
         self.tabWidget.setObjectName("tabWidget")
         font = QtGui.QFont()
         font.setFamily("Bahnschrift")
@@ -745,9 +784,8 @@ class Ui_MainWindow(object):
         self.tab1.setFont(font)
 
 
-
         self.NDataInfo = QtWidgets.QLabel(self.tab1)
-        self.NDataInfo.setGeometry(QtCore.QRect(0, 352, 961, 61))
+        self.NDataInfo.setGeometry(QtCore.QRect(0, 370, 961, 40))
         self.NDataInfo.setAlignment(QtCore.Qt.AlignCenter)
         self.NDataInfo.setObjectName("NDataInfo")
         font = QtGui.QFont()
@@ -756,9 +794,8 @@ class Ui_MainWindow(object):
         self.NDataInfo.setFont(font)
 
 
-
         self.NGraphLabel = QtWidgets.QLabel(self.tab1)
-        self.NGraphLabel.setGeometry(QtCore.QRect(1, 61, 71, 21))
+        self.NGraphLabel.setGeometry(QtCore.QRect(1, 71, 71, 21))
         self.NGraphLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.NGraphLabel.setObjectName("NGraphLabel")
         font = QtGui.QFont()
@@ -766,30 +803,40 @@ class Ui_MainWindow(object):
         self.NGraphLabel.setFont(font)
 
 
-
-
         self.NGraphView = QtWidgets.QGraphicsView(self.tab1)
-        self.NGraphView.setGeometry(QtCore.QRect(0, 60, 611, 291))
+        self.NGraphView.setGeometry(QtCore.QRect(0, 70, 611, 291))
         self.NGraphView.setObjectName("NGraphView")
 
 
-
-
         self.NRelatedGraphicView = QtWidgets.QGraphicsView(self.tab1)
-        self.NRelatedGraphicView.setGeometry(QtCore.QRect(610, 60, 351, 291))
+        self.NRelatedGraphicView.setGeometry(QtCore.QRect(610, 70, 355, 291))
         self.NRelatedGraphicView.setObjectName("NRelatedGraphicView")
 
 
 
-        self.NListView = QtWidgets.QListView(self.tab1)
-        self.NListView.setGeometry(QtCore.QRect(0, 0, 961, 61))
-        self.NListView.setObjectName("NListView")
+        # self.NListView = QtWidgets.QListView(self.tab1)
+        # self.NListView.setGeometry(QtCore.QRect(0, 30, 450, 30))
+        # self.NListView.setObjectName("NListView")
 
+
+        self.NTableWidget = QtWidgets.QTableWidget(self.tab1)
+        self.NTableWidget.setGeometry(QtCore.QRect(75, 0, 890, 100))
+        self.NTableWidget.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustIgnored)
+        self.NTableWidget.setAutoScroll(True)
+        self.NTableWidget.setShowGrid(False)
+        self.NTableWidget.setCornerButtonEnabled(True)
+        self.NTableWidget.setObjectName("NTableWidget")
+        self.NTableWidget.setColumnCount(9)
+        self.NTableWidget.setRowCount(2)
+        self.NTableWidget.horizontalHeader().setVisible(False)
+        self.NTableWidget.verticalHeader().setVisible(False)
+        self.NTableWidget.verticalHeader().setHighlightSections(True)
+        self.NTableWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)
 
 
 
         self.NComparisonLabel = QtWidgets.QLabel(self.tab1)
-        self.NComparisonLabel.setGeometry(QtCore.QRect(622, 65, 71, 21))
+        self.NComparisonLabel.setGeometry(QtCore.QRect(622, 75, 71, 21))
         self.NComparisonLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.NComparisonLabel.setObjectName("NComparisonLabel")
         font = QtGui.QFont()
@@ -807,13 +854,16 @@ class Ui_MainWindow(object):
         self.NRelatedLabel.setFont(font)
 
 
-        self.NGraphView.raise_()
-        self.NDataInfo.raise_()
-        self.NGraphLabel.raise_()
+
+
         self.NRelatedGraphicView.raise_()
-        self.NListView.raise_()
+        self.NDataInfo.raise_()
         self.NComparisonLabel.raise_()
+        self.NGraphView.raise_()
+        self.NGraphLabel.raise_()
         self.NRelatedLabel.raise_()
+
+
 
         self.tabWidget.addTab(self.tab1, "")
 
@@ -828,7 +878,7 @@ class Ui_MainWindow(object):
 
 
         self.GDataInfo = QtWidgets.QLabel(self.tab2)
-        self.GDataInfo.setGeometry(QtCore.QRect(0, 352, 961, 61))
+        self.GDataInfo.setGeometry(QtCore.QRect(0, 370, 961, 40))
         self.GDataInfo.setAlignment(QtCore.Qt.AlignCenter)
         self.GDataInfo.setObjectName("GDataInfo")
         font = QtGui.QFont()
@@ -838,14 +888,29 @@ class Ui_MainWindow(object):
 
 
 
-        self.GListView = QtWidgets.QListView(self.tab2)
-        self.GListView.setGeometry(QtCore.QRect(0, 0, 961, 61))
-        self.GListView.setObjectName("GListView")
+        #self.GListView = QtWidgets.QListView(self.tab2)
+       # self.GListView = QtWidgets.QT
+       # self.GListView.setGeometry(QtCore.QRect(0, 0, 961, 61))
+      #  self.GListView.setObjectName("GListView")
 
+
+        self.GTableWidget = QtWidgets.QTableWidget(self.tab2)
+        self.GTableWidget.setGeometry(QtCore.QRect(75, 0, 890, 100))
+        self.GTableWidget.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustIgnored)
+        self.GTableWidget.setAutoScroll(True)
+        self.GTableWidget.setShowGrid(False)
+        self.GTableWidget.setCornerButtonEnabled(True)
+        self.GTableWidget.setObjectName("GTableWidget")
+        self.GTableWidget.setColumnCount(9)
+        self.GTableWidget.setRowCount(2)
+        self.GTableWidget.horizontalHeader().setVisible(False)
+        self.GTableWidget.verticalHeader().setVisible(False)
+        self.GTableWidget.verticalHeader().setHighlightSections(True)
+        self.GTableWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)
 
 
         self.GComparisonLabel = QtWidgets.QLabel(self.tab2)
-        self.GComparisonLabel.setGeometry(QtCore.QRect(622, 65, 71, 21))
+        self.GComparisonLabel.setGeometry(QtCore.QRect(622, 75, 71, 21))
         self.GComparisonLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.GComparisonLabel.setObjectName("GComparisonLabel")
         font = QtGui.QFont()
@@ -855,19 +920,19 @@ class Ui_MainWindow(object):
 
 
         self.GGraphView = QtWidgets.QGraphicsView(self.tab2)
-        self.GGraphView.setGeometry(QtCore.QRect(0, 60, 611, 291))
+        self.GGraphView.setGeometry(QtCore.QRect(0, 70, 611, 291))
         self.GGraphView.setObjectName("GGraphView")
 
 
 
         self.GRelatedGraphView = QtWidgets.QGraphicsView(self.tab2)
-        self.GRelatedGraphView.setGeometry(QtCore.QRect(610, 60, 351, 291))
+        self.GRelatedGraphView.setGeometry(QtCore.QRect(610, 70, 355, 291))
         self.GRelatedGraphView.setObjectName("GRelatedGraphView")
 
 
 
         self.GGraphLabel = QtWidgets.QLabel(self.tab2)
-        self.GGraphLabel.setGeometry(QtCore.QRect(1, 61, 71, 21))
+        self.GGraphLabel.setGeometry(QtCore.QRect(1, 71, 71, 21))
         self.GGraphLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.GGraphLabel.setObjectName("GGraphLabel")
         font = QtGui.QFont()
@@ -886,11 +951,12 @@ class Ui_MainWindow(object):
 
         self.GRelatedGraphView.raise_()
         self.GDataInfo.raise_()
-        self.GListView.raise_()
+#        self.GListView.raise_()
         self.GComparisonLabel.raise_()
         self.GGraphView.raise_()
         self.GGraphLabel.raise_()
         self.GRelatedLabel.raise_()
+       # self.GTableWidget.raise_()
 
 
 
@@ -942,16 +1008,19 @@ class Ui_MainWindow(object):
         self.SearchButton.setStyle(s)
         self.HomeButton.setStyle(s)
         self.SearchTextEdit.setStyle(s)
-        self.Editbox2.setStyle(s)
+        self.SearchTextEdit2.setStyle(s)
         self.RecomProgressBar.setStyle(s)
         self.SearchButton2.setStyle(s)
         self.tab1.setStyle(s)
         self.tab2.setStyle(s)
         self.tabWidget.setStyle(s)
+        self.NTableWidget.setStyle(s)
+        self.GTableWidget.setStyle(s)
 
 
 #connect
         self.SearchButton.clicked.connect(SearchBt_pushed)
+        self.SearchButton2.clicked.connect(SearchBt_pushed2)
         self.HomeButton.clicked.connect(HomeBt_pushed)
         self.retranslateUi(MainWindow)
         self.MainStack.setCurrentIndex(0)
@@ -981,9 +1050,57 @@ class Ui_MainWindow(object):
         self.HomeButton.setText(_translate("MainWindow", "Home"))
 
 
-#EVENT LISTENER
+# EVENT LISTENER
+
+
 def SearchBt_pushed(self):
+        import Crawler
+        keyword = ui.SearchTextEdit.toPlainText()
+        ui.SearchTextEdit2.setPlainText(keyword)
+
         ui.MainStack.setCurrentIndex(1)
+        rk,pb=Crawler.Crawler.get_abs_value_naver(keyword) #키워드값 크롤링
+        row=0
+        column=0
+        for r in rk: #Table widget에 연관검색어 입력
+                item = QtWidgets.QTableWidgetItem()
+                item.setText(r)
+                ui.NTableWidget.setItem(row,column,item)
+                if column== 8:
+                        row+=1
+                        column=0
+                        if row==2:
+                                print("column이 꽉찼습니다")
+                                break
+                else :
+                        column+=1
+       # ui.MonLCD.setNumDigits(rk.values()[0])
+        print(str(rk)) # 연관 검색어만 뽑기
+        print(pb) # 발행량 뽑기
+
+def SearchBt_pushed2(self):
+        import Crawler
+        keyword = ui.SearchTextEdit2.toPlainText()
+        ui.SearchTextEdit.setPlainText(keyword)
+        rk, pb = Crawler.Crawler.get_abs_value_naver(keyword)
+        row = 0
+        column = 0
+        for r in rk:
+                item = QtWidgets.QTableWidgetItem()
+                item.setText(r)
+                ui.NTableWidget.setItem(row, column, item)
+                if column == 8:
+                        row += 1
+                        column = 0
+                        if row == 2:
+                                print("column이 꽉찼습니다")
+                                break
+                else:
+                        column += 1
+       # ui.MonLCD.setNumDigits(rk.values()[0])
+
+
+
 def HomeBt_pushed(self):
         ui.MainStack.setCurrentIndex(0)
 

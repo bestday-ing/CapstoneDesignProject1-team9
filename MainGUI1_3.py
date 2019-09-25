@@ -14,11 +14,12 @@ from PyQt5.QtWidgets import *
 global ui
 #global SearchTextEdit
 global keyword
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
-#MainWINDOW
+        #MainWINDOW
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1094, 683)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
@@ -1054,12 +1055,34 @@ class Ui_MainWindow(object):
 
 
 def SearchBt_pushed(self):
+        import naverSearchAPI
+        import summary_and_visualization as sv
         import Crawler
+
+        StartDate = "2016-01-01"
+        EndDate = "2018-11-30"
+        DeviceType = ""
+
         keyword = ui.SearchTextEdit.toPlainText()
         ui.SearchTextEdit2.setPlainText(keyword)
 
+        naverSearchAPI.Search(StartDate, EndDate, keyword, DeviceType)
+        sv.printSummary('result.csv')
+
         ui.MainStack.setCurrentIndex(1)
-        rk,pb=Crawler.Crawler.get_abs_value_naver(keyword) #키워드값 크롤링
+
+        pic = QtGui.QPixmap("result.png")
+        scene = QtWidgets.QGraphicsScene()
+        scene.setSceneRect(0, 70, 611, 291)
+        scene.addItem(QtWidgets.QGraphicsPixmapItem(pic))
+
+        ui.NGraphView.setScene(scene)
+        ui.NGraphView.setRenderHint(QtGui.QPainter.Antialiasing)
+        ui.NGraphView.show()
+
+        '''
+        rk,pb= Crawler.Crawler.get_abs_value_naver(keyword) #키워드값 크롤링
+        
         row=0
         column=0
         for r in rk: #Table widget에 연관검색어 입력
@@ -1075,8 +1098,8 @@ def SearchBt_pushed(self):
                 else :
                         column+=1
        # ui.MonLCD.setNumDigits(rk.values()[0])
-        print(str(rk)) # 연관 검색어만 뽑기
-        print(pb) # 발행량 뽑기
+       '''
+
 
 def SearchBt_pushed2(self):
         import Crawler

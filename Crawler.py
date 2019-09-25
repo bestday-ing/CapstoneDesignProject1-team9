@@ -8,11 +8,10 @@ class Crawler:
         publishVolumes = {} # blog : 발행량, cafe : 발행량, knwlgin : 발행량
 
         driver = webdriver.Chrome('/Users/yubin/ChromeDriver/chromedriver4')  # mac 나의 컴퓨터 기준으로 크롬 드라이버 저장된 위치, test시 수정해서 쓰세요
-        driver.implicitly_wait(2)
         driver.get('http://surffing.net/')
         driver.find_element_by_xpath('//*[(@id = "saerchKeyword")]').send_keys(searchword)
         driver.find_element_by_class_name('key-btn').click()  # 자동 클릭처리
-
+        driver.implicitly_wait(2)
         results = driver.find_elements_by_xpath('//td')
 
         count = 0
@@ -50,14 +49,17 @@ class Crawler:
 
         return relatedKeywords, publishVolumes
 
-
+'''
 # test용 -- 지워질 코드
-sw = '삼성'
+sw = '검색어'
 rk, pb = Crawler.get_abs_value_naver(sw) # 여러개 return 했기 때문에 tuple로 반환하기 때문
 # Crawler object 자체 함수,,
-print(rk.keys()) # 연관 검색어만 뽑기
-print(pb.values()) # 발행량 뽑기
-print(pb) # dic 구조 확인
+# print(rk.keys()) # 연관 검색어만 뽑기
+# print(pb.values()) # 발행량 뽑기
+# print(pb[sw]) # 발행량 뽑기
+print(rk[sw]) # 발행량 뽑기
+# print(pb) # dic 구조 확인
+'''
 
 
 

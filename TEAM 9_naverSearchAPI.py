@@ -8,6 +8,8 @@ import urllib.request
 import datetime
 # from rpy2.robjects import r
 
+from Crawler import Crawler
+
 # 주어진 구간에 대한 검색함수. json -> dict -> list 형식으로 변환하여 재구성해서 반환
 def SectionSearch(StartDate, EndDate, Keyword, DeviceType):
     client_id = "QqTTJVe3ttjxiFKxy6gi"
@@ -73,8 +75,25 @@ def Search(StartDate, EndDate, Keyword, DeviceType):
     # (최근검색량 / 최근달 비율) * 검색량 구할 달 해서
     # 17년 1월 ~ 4월의 월간 검색량을 구하도록
     FullDatalist = SectionSearch(StartDate, FindRecentMonth(), Keyword, DeviceType)
+
+
     # 실제 최근 1달 검색량은 나중에 구하는 것으로 (현재는 데이터가 없어서 1000으로 둠)
-    RecentRealCount = 1000
+    rk, pb = Crawler.get_abs_value_naver(Keyword)
+
+
+    RecentRealCountArr = rk[Keyword]
+
+    for i in range(0,2):
+        buff = RecentRealCountArr[i].split(",")
+
+        number = ''
+        for num in buff:
+            number += num
+
+        RecentRealCountArr[i] = number
+
+    RecentRealCount = int(RecentRealCountArr[0]) + int(RecentRealCountArr[1])
+    # print(RecentRealCount)
     FullDatalist.reverse()
     RealCountRatio = FullDatalist[0][1]
     FullDatalist.reverse()

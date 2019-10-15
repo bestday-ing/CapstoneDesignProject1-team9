@@ -15,7 +15,6 @@
             py = spawn('python',['Crawler.py']),
             jsonObject = new Object();
             jsonObject.keyword = "삼성";
-            jsonObject.kimdoho = "시발";
 
             dataString = ''
             py.stdout.on('data',function(data){

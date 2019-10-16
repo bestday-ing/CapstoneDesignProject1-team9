@@ -12,23 +12,24 @@
 
 
             var spawn = require('child_process').spawn,
-            py = spawn('python',['TEAM_9_naverSearchAPI.py']),
+            py = spawn('python',['Crawler.py']),
             jsonObject = new Object();
             jsonObject.keyword = "samsung";
             jsonObject.test = "test";
 
-            dataString = '';
+            dataString = ''
             py.stdout.on('data',function(data){
                     dataString +=data.toString();
             });
             py.stdout.on('end',function(){
                 console.log('Read STring=',dataString);
+
             });
             py.stdin.write(JSON.stringify(jsonObject));
             //py.stdin.write("삼성");
             
             py.stdin.end();
-            console.log(py.stdout.read(2048));
+            console.log(py.stdout.read(1024));
 
             
 //             $.ajax({

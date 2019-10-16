@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>div 태그</title>
+    <link href="./static/css/global.css" rel="stylesheet" type="text/css" />
+    <script src = "https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+	<div id="box">
+		<div id="top">top</div>
+		<div id="left">left</div>
+		<div id="main">main</div>
+        <div id="bottom">bottom</div>
+        
+        <div id="tester" style="width:600px;height:250px;"></div>
+
+        <script>
+            TESTER = document.getElementById('tester');
+            Plotly.plot( TESTER, [{
+            x: [1, 2, 3, 4, 5],
+            y: [1, 2, 4, 8, 16] }], {
+            margin: { t: 0 } } );
+        </script>
+	</div>
+</body>
+</html>

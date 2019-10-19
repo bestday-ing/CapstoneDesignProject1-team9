@@ -90,14 +90,14 @@ def Search():
     Searchword = read_in()
     Keyword = Searchword["keyword"]
     FullDatalist = SectionSearch(StartDate, FindRecentMonth(), Keyword, DeviceType)
-    print(FullDatalist)
     # 실제 최근 1달 검색량은 나중에 구하는 것으로 (현재는 데이터가 없어서 1000으로 둠)
+    
     rk, pb = get_abs_value_naver(Keyword)
-    print(rk)
-    print(pb)
 
+    RecentRealCountArr = []
+    Keyword = Keyword.upper()
     RecentRealCountArr = rk[Keyword]
-    print(RecentRealCountArr)
+
     for i in range(0,2):
         buff = RecentRealCountArr[i].split(",")
 
@@ -108,7 +108,6 @@ def Search():
         RecentRealCountArr[i] = number
 
     RecentRealCount = int(RecentRealCountArr[0]) + int(RecentRealCountArr[1])
-    #print(RecentRealCount)
     FullDatalist.reverse()
     RealCountRatio = FullDatalist[0][1]
     FullDatalist.reverse()
@@ -120,7 +119,7 @@ def Search():
         FinalDatalist.append(i)
     # FinalDatalist에는 [[기간1, 비율1, 검색량1], [기간2, 비율2, 검색량2], ... ] 로 구성, 기간은 1달 단위
     print(FinalDatalist)
-    #SaveExcel(FinalDatalist)
+    SaveExcel(FinalDatalist)
 
     
 

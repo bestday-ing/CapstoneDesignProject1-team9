@@ -1,18 +1,18 @@
 
-            var temp;
-            function input(){
-                var input = document.getElementById("keyword-formbuilder-2").value;
-                temp = input;
-                // temp = openSomehowPythonInterpreter("./Crawler.py", "get_abs_value_naver(temp)");
-            }
+            //var temp;
+            // function input(){
+            //     var input = document.getElementById("keyword-formbuilder-2").value;
+            //     temp = input;
+            //     // temp = openSomehowPythonInterpreter("./Crawler.py", "get_abs_value_naver(temp)");
+            // }
 
-            function output(){
-                document.getElementById("output").value = temp;
-            }    
+            // function output(){
+            //     document.getElementById("output").value = temp;
+            // }    
 
 
             var spawn = require('child_process').spawn,
-            py = spawn('python',['TEAM_9_naverSearchAPI.py']),
+            py = spawn('python',['Edited_TEAM_9_naverSearchAPI.py']),
             jsonObject = new Object();
             jsonObject.keyword = "samsung";
             jsonObject.test = "test";
@@ -29,12 +29,3 @@
             
             py.stdin.end();
             console.log(py.stdout.read(2048));
-
-            
-//             $.ajax({
-//               type: "POST",
-//               url: "./Crawler.py",
-//               data: { param: temp}
-//           }).done(function( o ) {
-//    // do something
-// });

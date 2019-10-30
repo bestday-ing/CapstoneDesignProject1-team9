@@ -87,15 +87,16 @@ def Search():
 
 
 
-    Searchword = read_in()
-    Keyword = Searchword["keyword"]
+    # Searchword = read_in()
+    # Keyword = Searchword["keyword"]
+    Keyword = sys.argv[1]
     FullDatalist = SectionSearch(StartDate, FindRecentMonth(), Keyword, DeviceType)
     # 실제 최근 1달 검색량은 나중에 구하는 것으로 (현재는 데이터가 없어서 1000으로 둠)
     
     rk, pb = get_abs_value_naver(Keyword)
 
     RecentRealCountArr = []
-    Keyword = Keyword.upper()
+    # Keyword = Keyword.upper()
     RecentRealCountArr = rk[Keyword]
 
     for i in range(0,2):
@@ -119,7 +120,7 @@ def Search():
         FinalDatalist.append(i)
     # FinalDatalist에는 [[기간1, 비율1, 검색량1], [기간2, 비율2, 검색량2], ... ] 로 구성, 기간은 1달 단위
     print(FinalDatalist)
-    SaveExcel(FinalDatalist)
+    # SaveExcel(FinalDatalist)
 
     
 
@@ -128,8 +129,6 @@ def SaveExcel(Datalist):
     data = pd.DataFrame(Datalist)
     data.columns = ['Period', 'ratio', 'count']
     data.to_csv('Test.csv', encoding='cp949')
-
-
 
 
 Search()

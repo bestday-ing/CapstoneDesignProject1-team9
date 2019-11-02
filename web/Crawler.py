@@ -7,8 +7,10 @@ def get_abs_value_naver(searchword):
     publishVolumes = {} # blog : 발행량, cafe : 발행량, knwlgin : 발행량
 
     #driver = webdriver.Chrome('C:\\Python\\chromedriver\\chromedriver_77.exe')  # 버전에 따라 수정해서 
-    # driver = webdriver.Chrome('./chromedriver_77.exe')  # 버전에 따라 수정해서
-    driver = webdriver.Chrome('/Users/yubin/ChromeDriver/chromedriver4')  # 맥 경로, 불필요시 주석 처리바람
+    try:
+        driver = webdriver.Chrome('./chromedriver_77.exe')  # 버전에 따라 수정해서
+    except:
+        driver = webdriver.Chrome('/Users/yubin/ChromeDriver/chromedriver4')  # 맥 경로, 불필요시 주석 처리바람
     driver.get('http://surffing.net/')
     driver.find_element_by_xpath('//*[(@id = "saerchKeyword")]').send_keys(searchword)
     driver.find_element_by_class_name('key-btn').click()  # 자동 클릭처리

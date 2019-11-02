@@ -36,6 +36,9 @@ def crawlingAndDownloading(word, path):
 
     # 차트 3개 중 가장 위의 차트가 가장 먼저 로드되는 경우, 0번에 저장됨(일반적)
     lst[0].click()
+    
+    # 다운로드 대기
+    sleep(1)
 
     # 만약 두 번째 차트가 먼저 로드된 경우, 추가 다운로드를 통해 첫 번째 차트를 다운로드
     if os.path.isfile(path) == False:

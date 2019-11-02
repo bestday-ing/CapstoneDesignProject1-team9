@@ -7,8 +7,10 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import json
 
-
-driver = webdriver.Chrome('/Users/yubin/ChromeDriver/chromedriver4')  # 버전에 따라 수정해서
+try:
+    driver = webdriver.Chrome('/Users/yubin/ChromeDriver/chromedriver4')  # 맥 경로, 불필요시 주석 처리바람
+except:
+    driver = webdriver.Chrome('./chromedriver_77.exe')  # 버전에 따라 수정해서
 wait = WebDriverWait(driver, 20)
 
 # thread 2

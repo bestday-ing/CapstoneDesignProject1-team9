@@ -6,7 +6,12 @@ var loadFirstPage = function(req, res) {
 var showResults = function(req, res) {
     console.log('/showResults 패스 요청됨.');
     var keyword = req.param('keyword');
+    var startDate = req.param('startDate');
+    var endDate = req.param('endDate');
+    
     console.log('/showResults 사용자가 입력한 검색어는 ' + keyword);
+    console.log('/showResults 사용자가 입력한 날짜 ' + startDate + ' ' + endDate );
+    
     // 받은 키워드로 여러가지 연산 처리한 후 데이터 셋에 담았다고 가정 -- 나중에 채울 것임
 
     let { PythonShell } = require('python-shell')
@@ -19,38 +24,32 @@ var showResults = function(req, res) {
         args: [keyword]
     };
 
-    // naver API 
-    PythonShell.run('Edited_TEAM_9_naverSearchAPI.py', options, function(err, results) {
-        if (err) throw err;
-        //results[0] : "['test.py', 'value1', 'value2', 'value3', 'a', 'b', 'c']" 인 상태
-        var str = results[0]
-        str = str.replace(/'/g, '"'); // '' 를 " "로 바꿈
-        var dataSet = JSON.parse(str)
-        // console.log('typeof:', typeof(array));
-        console.log(dataSet);
+    PythonShell.run('thread_crawling.py', options, function(err, results) {
+    if (err) throw err;
+    //results[0] : "['test.py', 'value1', 'value2', 'value3', 'a', 'b', 'c']"
+    if(results[0]=='성공'){
+        console.log()
+        var obj = JSON.parse(results[1]);
+        console.log(obj)
+        //console.log(obj.naver.graphData) //이게 그 기존의 배열
 
-        /* dataSet test*/
-        //console.log(dataSet[0]); //원소 하나 뽑기
-        console.log(typeof(dataSet[0][0]));
-        //console.log(dataSet.length);
+        var NaverPeriod = [];
+        var NaverCount = [];
 
-        var period = [];
-        var count = [];
-
-        for (var i = 0; i < dataSet.length; i++) {
-            period.push(dataSet[i][0]);
-            count.push(dataSet[i][2]);
+        for (var i = 0; i < obj.naver.graphData.length; i++) {
+            NaverPeriod.push(obj.naver.graphData[i][0]);
+            NaverCount.push(obj.naver.graphData[i][2]);
         }
-        
-        console.log(period);
-        console.log(count);
 
-        // naver : json 객체 , daum : json 객체 이런 식으로 나중에 구상해야지
-        //var obj = { period: dataSet[0], count: dataSet[2] };
-        //var myJSON = JSON.stringify(obj);
-        //console.log(myJSON);
 
-        var context = { keyword: keyword, period: period, count: count };
+        obj.naver.graphData = {
+            'period' : NaverPeriod,
+            'count' : NaverCount
+        }
+
+        console.log(obj.naver) //이게 그 기존의 배열
+
+        var context = { keyword: keyword, dataSet : obj };
         req.app.render("searchResult.ejs", context, function(err, html) {
             if (err) {
                 console.error('뷰 렌더링 중 에러 발생 : ' + err.stack);
@@ -58,11 +57,11 @@ var showResults = function(req, res) {
             }
             res.end(html);
         });
-    });
+    }
+});
+    
+}
 
-
-
-};
 
 module.exports.loadFirstPage = loadFirstPage;
 module.exports.showResults = showResults;

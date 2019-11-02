@@ -23,120 +23,298 @@
     <link rel="preload" as="style" href="../public/assets/mobirise/css/mbr-additional.css">
     <link rel="stylesheet" href="../public/assets/mobirise/css/mbr-additional.css" type="text/css">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.2/moment-with-locales.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>
+    <style>
+        body{
+            display: flex;
+        } 
+        .Navigator1 {
+            width: 500px;
+            margin: 0 auto;
+        }
+
+        ul.tabs {
+            margin: 0px;
+            padding: 0px;
+            list-style: none;
+        }
+
+        ul.tabs li {
+            background: none;
+            color: #222;
+            display: inline-block;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+
+        ul.tabs li.current {
+            background: #ededed;
+            color: #222;
+        }
+
+        .tab-content2 {
+            display: none;
+            padding: 15px;
+        }
+
+        .tab-content2.current {
+            display: inherit;
+        }
+
+        .results {
+            width: 100%;
+            padding: 12px;
+            color: black;
+        }
+
+        .RelatedTable {
+            /* font-weight: bold; */
+            width: 30%;
+            height: 200px;
+            text-align: center;
+        }
+
+        #navbar {
+            display: block;
+            background-color: powderblue;
+        }
+
+        #rightsection {
+            display: inline-flex;
+            flex-direction: column;
+            flex:10;
+
+        }
+        #menubarsection{
+            flex:1;
+        }
+        #graphsection1{
+            flex:2;
+        }
+        #graphsection1{
+            flex:1;
+        }
+    </style>
 </head>
 
 <body>
+    <!-- 상단 메뉴바 -->
     <section class="menu cid-rx3IEQFgmC" once="menu" id="menu04-a0" data-sortbtn="btn-primary">
-        <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
-            <form id='kywrd_form' method='get' action='/showResults' class="collapse navbar-collapse">
-                <input id="keyword" type="text" name="keyword" placeholder="keyword" data-form-field="keyword" class="form-control display-7" value="" id="keyword-formbuilder-2">
-                <script>
-                    document.getElementById("keyword").value = "<%= keyword %>";
-                </script>
-                <div class="icons-menu">
-                    <a href="javascript:{}" onclick="document.getElementById('kywrd_form').submit();">
-                        <span class="p-2 mbr-iconfont mobi-mbri-search mobi-mbri" style="color: rgb(87, 70, 139); fill: rgb(87, 70, 139);"></span>
-                    </a>
+        <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg" id="navbar">
+            <ul class="tabs">
+                <li id="gSearch" class="tab-link current" data-tab="tab-1">일반 검색</li>
+                <li id="dSerach" class="tab-link" data-tab="tab-2">검색 필터</li>
+            </ul>
+            <!--TAB1-->
+            <div id="tab-1" class="tab-content2 current">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <form id='kywrd_form' method='get' action='/showResults' class="collapse navbar-collapse">
+                        <input id="keyword" type="text" name="keyword" placeholder="keyword" data-form-field="keyword" class="form-control display-7" value="" id="keyword-formbuilder-2">
+                        <script>
+                            document.getElementById("keyword").value = "<%= keyword %>";
+                        </script>
+                        <div class="icons-menu">
+                            <a href="javascript:{}" onclick="document.getElementById('kywrd_form').submit();">
+                                <span class="p-2 mbr-iconfont mobi-mbri-search mobi-mbri" style="color: rgb(87, 70, 139); fill: rgb(87, 70, 139);"></span>
+                            </a>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
+            <!--TAB2-->
+            <div id="tab-2" class="tab-content2">
+                <input placeholder="시작 날짜" id="fromDate" type="text" class="form-control display-7" style="width: 30%; display: inline;">
+                <input placeholder="종료 날짜" id="toDate" type="text" class="form-control display-7" style="width: 30%; display: inline;">
+                <!-- <div class="icons-menu"> -->
+                <a href="searchResult.html" target="_blank">
+                    <span class="p-2 mbr-iconfont mobi-mbri-search mobi-mbri" style="color: rgb(87, 70, 139); fill: rgb(87, 70, 139);"></span>
+                </a>
+                <!-- DateTimePicker 위젯를 적용하기 위한 TextBox를 선언한다. -->
+                <!-- </div> -->
+                <!-- 여기 아래로 nav bar 하단에 들어갈 연관 검색어 들어감 -->
+                <!-- 연관검색어는 탭에 상관없이 들어감 -->
+            </div>
+            <div class="results">
+                <a>sample</a>
+                <a>automated</a>
+                <a>search</a>
+                <a>results</a>
+            </div>
         </nav>
     </section>
-    <section class="accordion1 cid-rx3JXkfsaj" id="accordion01-a2" data-sortbtn="btn-primary">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-12">
-                    <div class="section-head text-center space30">
-                        <h2 class="mbr-section-title pb-5 mbr-fonts-style display-2">요약해서 보여주기</h2>
-                        <div id="box">
-                            <div id="tester" style="width:100%;"></div>
-                            <script>
-                            var array = [];
-                            <%
-                                array = period;
-                                console.log(array);
-                                array.forEach(function (item, index, array) {
-	                               array[index] = "\'"+ item + "\'";
-                                });
-                                console.log(array);
-                            %>
-                                
-                            TESTER = document.getElementById('tester');
-                            Plotly.plot(TESTER, [{
-                                x: [<%- period %>], // 날짜
-                                y: [<%= count %>], // 검색량
-                                type: 'scatter'
-                            }]);
-                            </script>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
+    <!-- 좌측 툴바 -->
+    <section class="menu cid-rx3IEQFgmC" once="menu" id="menubarsection" data-sortbtn="btn-primary" style="background-color: #212529;">
+        <ul class="sidebar navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Pages</span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                    <h6 class="dropdown-header">Login Screens:</h6>
+                    <a class="dropdown-item" href="login.html">Login</a>
+                    <a class="dropdown-item" href="register.html">Register</a>
+                    <a class="dropdown-item" href="forgot-password.html">Forgot Password</a>
+                    <div class="dropdown-divider"></div>
+                    <h6 class="dropdown-header">Other Pages:</h6>
+                    <a class="dropdown-item" href="404.html">404 Page</a>
+                    <a class="dropdown-item" href="blank.html">Blank Page</a>
                 </div>
-            </div>
-        </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="charts.html">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Charts</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="tables.html">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Tables</span></a>
+            </li>
+        </ul>
     </section>
-    <section class="accordion1 cid-rx3JXkfsaj" id="accordion01-a2" data-sortbtn="btn-primary">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-12">
-                    <div class="section-head text-center space30">
-                        <h2 class="mbr-section-title pb-5 mbr-fonts-style display-2">
-                            포털사이트 별 상세 내역</h2>
-                    </div>
-                    <div class="clearfix"></div>
-                    <div id="bootstrap-accordion_18" class="panel-group accordionStyles accordion" role="tablist" aria-multiselectable="true">
-                        <div class="card">
-                            <div class="card-header" role="tab" id="headingOne">
-                                <a role="button" class="panel-title collapsed" data-toggle="collapse" data-core="" href="#collapse1_18" aria-expanded="false" aria-controls="collapse1">
-                                    <h4 class="mbr-fonts-style display-5">
-                                        <span class="sign mbr-iconfont mbri-arrow-down inactive"></span>네이버
-                                    </h4>
-                                </a>
-                            </div>
-                            <div id="collapse1_18" class="panel-collapse noScroll collapse " role="tabpanel" aria-labelledby="headingOne" data-parent="#bootstrap-accordion_18">
-                                <div class="panel-body p-4">
-                                    <p class="mbr-fonts-style panel-text display-7">
-                                        <!-- 관련 세부 사항 -->
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header" role="tab" id="headingTwo">
-                                <a role="button" class="collapsed panel-title" data-toggle="collapse" data-core="" href="#collapse2_18" aria-expanded="false" aria-controls="collapse2">
-                                    <h4 class="mbr-fonts-style display-5">
-                                        <span class="sign mbr-iconfont mbri-arrow-down inactive"></span>구글
-                                    </h4>
-                                </a>
-                            </div>
-                            <div id="collapse2_18" class="panel-collapse noScroll collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#bootstrap-accordion_18">
-                                <div class="panel-body p-4">
-                                    <p class="mbr-fonts-style panel-text display-7">
-                                        <!-- 관련 세부 사항 -->
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header" role="tab" id="headingThree">
-                                <a role="button" class="collapsed panel-title" data-toggle="collapse" data-core="" href="#collapse3_18" aria-expanded="false" aria-controls="collapse3">
-                                    <h4 class="mbr-fonts-style display-5">
-                                        <span class="sign mbr-iconfont mbri-arrow-down inactive"></span>다음
-                                    </h4>
-                                </a>
-                            </div>
-                            <div id="collapse3_18" class="panel-collapse noScroll collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#bootstrap-accordion_18">
-                                <div class="panel-body p-4">
-                                    <p class="mbr-fonts-style panel-text display-7">
-                                        <!-- 관련 세부 사항 -->
-                                    </p>
-                                </div>
+    <section id="rightsection">
+        <section class="accordion1 cid-rx3JXkfsaj" id="accordion01-a2" data-sortbtn="btn-primary">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-12">
+                        <div class="section-head text-center space30">
+                            <h2 class="mbr-section-title pb-5 mbr-fonts-style display-2">요약해서 보여주기</h2>
+                            <div id="box">
+                                <div id="tester" style="width:100%;"></div>
+                                <script>
+                                var array = [];
+                                <%
+                                    array = dataSet.naver.graphData.period;
+                                    array.forEach(function (item, index, array) {
+                                       array[index] = "\'"+ item + "\'"; // 정말 정말 중요! '를 붙여줌 흑흑,,
+                                    });
+                                    console.log(array);
+                                %>
+
+                                var today = new Date();
+                                var dd = String(today.getDate()).padStart(2, '0');
+                                var mm = String(today.getMonth() - 1 + 1).padStart(2, '0'); //January is 0!
+                                var yyyy = today.getFullYear();
+
+                                lastmonth = yyyy + '-' + mm + '-' + dd;
+
+                                var daum = {
+                                    x: [lastmonth],
+                                    y: [<%= dataSet.daum.count %>],
+                                    mode: 'markers',
+                                    type: 'scatter'
+                                };
+
+                                var naver = {
+                                    x: [<%- array %>], // 기간
+                                    y: [<%= dataSet.naver.graphData.count %>], // 검색량
+                                    mode: 'lines+markers',
+                                    type: 'scatter'
+                                };
+
+                                var data = [daum, naver];
+                                TESTER = document.getElementById('tester');
+                                Plotly.newPlot(TESTER, data);
+                                </script>
                             </div>
                         </div>
+                        <div class="clearfix"></div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
+        <!-- 포털사이트별 상세 -->
+        <section class="tabs1 cid-rlqwGHIhAw" id="tabs02-96">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-12">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item first"><a class="nav-link mbr-fonts-style active display-7" role="tab" data-toggle="tab" href="#tabs02-96_tab0" aria-selected="true">네이버</a></li>
+                            <li class="nav-item"><a class="nav-link mbr-fonts-style active display-7" role="tab" data-toggle="tab" href="#tabs02-96_tab1" aria-selected="true">다음</a></li>
+                            <li class="nav-item"><a class="nav-link mbr-fonts-style active display-7" role="tab" data-toggle="tab" href="#tabs02-96_tab2" aria-selected="true">
+                                    구글</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="tab1" class="tab-pane in active" role="tabpanel">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p class="mbr-text pt-4 mbr-fonts-style display-7">
+                                            <table border="2" class="table RelatedTable" style="float:right; margin-left:10px;">
+                                                <thead>
+                                                    <tr class="table-heads">
+                                                        <th class="head-item1 mbr-fonts-style display-7">
+                                                            순위</th>
+                                                        <th class="head-item mbr-fonts-style display-7">
+                                                            검색어</th>
+                                                        <th class="head-item mbr-fonts-style display-7">
+                                                            검색량</th>
+                                                    </tr>
+                                                <tbody>
+                                                    <tr class="table-heads">
+                                                        <td class="body-item1 mbr-fonts-style display-7">1</td>
+                                                        <td class="body-item mbr-fonts-style display-7">
+                                                            펜</td>
+                                                        <td class="body-item mbr-fonts-style display-7">
+                                                            1000</td>
+                                                    </tr>
+                                                    <tr class="table-heads">
+                                                        <td class="body-item1 mbr-fonts-style display-7">2</td>
+                                                        <td class="body-item mbr-fonts-style display-7">
+                                                            전자펜</td>
+                                                        <td class="body-item mbr-fonts-style display-7">
+                                                            20000
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div id="naver" style="width:65%; float:left; margin-right:10px;"></div>
+                                            <script>
+                                            naver_id = document.getElementById('naver');
+                                            Plotly.plot(naver_id, [{
+                                                        x: [<%- array %>], // 기간
+                                                        y: [<%= dataSet.naver.graphData.count %>], // 검색량
+                                                        mode: 'lines + markers',
+                                                        type: 'scatter'
+                                                    }]);
+                                            </script>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tab2" class="tab-pane" role="tabpanel">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p class="mbr-text pt-4 mbr-fonts-style display-7">
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tab3" class="tab-pane" role="tabpanel">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p class="mbr-text pt-4 mbr-fonts-style display-7">
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </section>
+    <!-- 하단 메뉴 바
     <section once="" class="cid-rEoHegd1JZ" id="footer01-0" data-sortbtn="btn-primary">
         <div class="container">
             <div class="media-container-row align-center mbr-white">
@@ -147,7 +325,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
     <script src="../public/assets/web/assets/jquery/jquery.min.js"></script>
     <script src="../public/assets/popper/popper.min.js"></script>
     <script src="../public/assets/tether/tether.min.js"></script>
@@ -166,3 +344,8 @@
 </body>
 
 </html>
+<script>
+// 선언한 TextBox에 DateTimePicker 위젯을 적용한다.
+$('#fromDate').datetimepicker({
+            language: 'ko', // 화면에 출력될 언어를 한국어로 설정한다.
+            pickTime: false,

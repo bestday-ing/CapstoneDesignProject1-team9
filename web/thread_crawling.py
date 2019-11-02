@@ -8,12 +8,12 @@ from selenium.webdriver.support import expected_conditions as EC
 import json
 
 
-driver = webdriver.Chrome('/Users/yubin/ChromeDriver/chromedriver4')  # 버전에 따라 수정해서
-wait = WebDriverWait(driver, 20)
+
 
 # thread 2
 def get_related_keywords_daum(searchword): # 검색량 뽑아내는거
-
+    driver = webdriver.Chrome('/Users/yubin/ChromeDriver/chromedriver4')  # 버전에 따라 수정해서
+    wait = WebDriverWait(driver, 20)
     driver.get('https://search.daum.net/search?w=tot&DA=YZR&t__nil_searchbox=btn&sug=&sugo=&q='+searchword) #연관 검색어 출력
     results = driver.find_elements_by_xpath('//a[@class= "keyword"]')
     realted = []
@@ -39,6 +39,8 @@ def get_related_keywords_daum(searchword): # 검색량 뽑아내는거
 
 
 def get_abs_value_naver(searchword):
+    driver = webdriver.Chrome('/Users/yubin/ChromeDriver/chromedriver4')  # 버전에 따라 수정해서
+    wait = WebDriverWait(driver, 20)
     relatedKeywords = {}  # 연관 검색어 : [pc, mobile]
     publishVolumes = {}  # blog : 발행량, cafe : 발행량, knwlgin : 발행량
 

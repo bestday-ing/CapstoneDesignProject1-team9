@@ -24,16 +24,157 @@
     <link rel="stylesheet" href="assets/formoid-css/recaptcha.css">
     <link rel="preload" as="style" href="assets/mobirise/css/mbr-additional.css">
     <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
-    <link rel="stylesheet" href="assets/my/text_animation.css">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/css/bootstrap-datetimepicker.min.css"
+        rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.2/moment-with-locales.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/js/bootstrap-datetimepicker.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/js/bootstrap-datetimepicker.min.js"></script>
     <style>
-        body{
+        /* 연관검색어 목록 css */
+        @import url(https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css);
+
+        .normal {
+            font-weight: 400
+        }
+
+        .bold {
+            font-weight: 700
+        }
+
+        .bolder {
+            font-weight: 800
+        }
+
+        .light {
+            font-weight: 300
+        }
+
+        html,
+        body {
+            font-family: 'NanumSquare', sans-serif;
+            /* position:relative; */
+        }
+
+        #wrap {
+            margin: 0px;
+            padding: 0px;
+            /* width: 100%; */
+            position: fixed;
+            left: 1600px;
+            top: 100px;
+            z-index: 2;
+        }
+
+
+        a,
+        img {
+            border: 0px;
+            text-decoration: none;
+        }
+
+        ul,
+        li {
+            list-style: none;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        h1 {
+            color: #525252;
+            font-size: 40px;
+            font-weight: 100;
+            text-align: center;
+            margin: 0px;
+            margin-top: 193px;
+        }
+
+        h1>b {
+            font-weight: 900;
+        }
+
+        #best_search {
+
+            margin: 0 auto;
+    padding-top: 50px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+        }
+
+        #best_search li,
+        dd {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        button {
+            width: 121px;
+            background-color: #0085e2;
+            color: #fff;
+            border: 0px;
+            height: 63px;
+            margin-left: -5px;
+            padding: 0px;
+            font-size: 18px;
+        }
+
+        #best_search li p {
+            color: #393939;
+            font-size: 17px;
+            font-weight: bold;
+            margin: 0px;
+            padding-right: 30px;
+        }
+
+        dd,dt {
+            margin: 0px;
+        }
+
+        dd a.t,dt a.t {
+            cursor: pointer;
+            margin: 0px;
+            color: #4b4b4b;
+            text-overflow: ellipsis;
+            /* overflow: hidden; */
+            width: 94px;
+            white-space: nowrap;
+            display: inline-block;
+            font-size: 17px;
+            text-align: left;
+            padding-right: 13px;
+            font-weight: 700;
+            vertical-align: middle;
+        }
+
+        dd .num,dt .num {
+            background-color: #4b4b4b;
+            color: #fff;
+            font-size: 10px;
+            margin-right: 10px;
+            vertical-align: middle;
+            width: 18px;
+            height: 18px;
+            float: left;
+            line-height: 18px;
+            text-align: center;
+        }
+
+        .best_add {
+            border: 1px solid #bebebe;
+            color: #4b4b4b;
+            padding: 0px 4px;
+            margin-left: 10px;
+        }
+
+        /* 연관검색어 목록 css */
+        body {
             display: flex;
-        } 
+        }
+
         .Navigator1 {
             width: 500px;
             margin: 0 auto;
@@ -54,7 +195,7 @@
         }
 
         ul.tabs li.current {
-            background: #ededed;
+            background-color: antiquewhite;
             color: #222;
         }
 
@@ -65,6 +206,7 @@
 
         .tab-content2.current {
             display: inherit;
+            flex: 7;
         }
 
         .results {
@@ -78,238 +220,337 @@
             width: 30%;
             height: 200px;
             text-align: center;
+            
         }
 
         #navbar {
-            display: block;
+            display: flex;
             background-color: powderblue;
+            min-height: auto;
+            left : 200px;
+
         }
 
         #rightsection {
             display: inline-flex;
             flex-direction: column;
-            flex:10;
+            flex: 10;
+            z-index: 1;
 
         }
-        #menubarsection{
-            flex:1;
+
+        #menubarsection {
+            flex: 1;
+            text-decoration-color: powderblue;
         }
-        #graphsection1{
-            flex:2;
+
+        #graphsection1 {
+            flex: 2;
         }
-        #graphsection1{
-            flex:1;
+
+        #graphsection1 {
+            flex: 1;
         }
     </style>
 </head>
 
 <body>
-    <!-- <div class="Navigator1">
+    <div id="wrap">
+        <div class="container">
+            <ul id="best_search">
+                <li>
+                    <p>연관검색어</p>
+                </li>
+                <li>
+                    <dl class="time1" style="display:">
+                        <dt><a class="t" href="#">
+                                <div class="num">1</div>자전거
+                            </a></dt>
+                        <dt><a class="t" href="#">
+                                <div class="num">2</div>전동킥보드
+                            </a></dt>
+                        <dt><a class="t" href="#">
+                                <div class="num">3</div>비키니
+                            </a></dt>
+                        <dt><a class="t" href="#">
+                                <div class="num">4</div>모노키니
+                            </a></dt>
+                        <dt><a class="t" href="#">
+                                <div class="num">5</div>원터치텐트
+                            </a></dt>
+                    </dl>
+                    <dl class="time2" style="display:none;">
+                        <dt><a class="t" href="#">
+                                <div class="num">6</div>등산화
+                            </a></dt>
+                        <dt><a class="t" href="#">
+                                <div class="num">7</div>풋살화
+                            </a></dt>
+                        <dt><a class="t" href="#">
+                                <div class="num">8</div>요가복
+                            </a></dt>
+                        <dt><a class="t" href="#">
+                                <div class="num">9</div>텐트
+                            </a></dt>
+                        <dt><a class="t" href="#">
+                                <div class="num">10</div>래쉬가드
+                            </a></dt>
+                    </dl>
+                    <dl class="time3" style="display:none;">
+                        <dt><a class="t" href="#">
+                                <div class="num">11</div>수영복
+                            </a></dt>
+                        <dt><a class="t" href="#">
+                                <div class="num">12</div>디스커버리반팔티
+                            </a></dt>
+                        <dt><a class="t" href="#">
+                                <div class="num">13</div>축구화
+                            </a></dt>
+                        <dt><a class="t" href="#">
+                                <div class="num">14</div>노스페이스바람막이
+                            </a></dt>
+                        <dt><a class="t" href="#">
+                                <div class="num">15</div>전기자전거
+                            </a></dt>
+                    </dl>
+                    <dl class="time4" style="display:none;">
+                        <dt><a class="t" href="#">
+                                <div class="num">16</div>캠핑카
+                            </a></dt>
+                        <dt><a class="t" href="#">
+                                <div class="num">17</div>캠핑테이블
+                            </a></dt>
+                        <dt><a class="t" href="#">
+                                <div class="num">18</div>여성골프웨어
+                            </a></dt>
+                        <dt><a class="t" href="#">
+                                <div class="num">19</div>여성래쉬가드
+                            </a></dt>
+                        <dt><a class="t" href="#">
+                                <div class="num">20</div>캠핑의자
+                            </a></dt>
+                    </dl>
+                </li>
+                <li>
+                    <a class="best_add ad1" style="cursor:pointer;" onClick="javascript:view('0')">></a>
+                    <a class="best_add ad2" onClick="javascript:view('1')" style="display:none;cursor:pointer; ">></a>
+                    <a class="best_add ad3" onClick="javascript:view('2')" style="display:none;cursor:pointer; ">></a>
+                    <a class="best_add ad4" onClick="javascript:view('3')" style="display:none;cursor:pointer; ">
+                        <</a> </li> </ul> </div> </div> 
+            <!-- Navigator bar section -->
+                        <section class="menu cid-rx3IEQFgmC" once="menu" id="menu04-a0"data-sortbtn="btn-primary">
+                            <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg" id="navbar">
+                                    <h4>TEAM 9&nbsp;&nbsp;&nbsp;</h4>
+                                <!-- <img src="assets/images/dual.png" alt="" title="" style = "width:7%; height:7%;" > -->
+                                
+                                <ul class="tabs">
+                                    <li id="gSearch" class="tab-link current" data-tab="tab-1">일반 검색</li>
+                                    <li id="dSerach" class="tab-link" data-tab="tab-2">검색 필터</li>
+                                </ul>
 
-
-
-        <div id="tab-1" class="tab-content current">
-            ---- ---- -------- ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- ---- -------- ---- ----
-            ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- ---- --------
-            ---- ---- ---- ----
-        </div>
-        <div id="tab-2" class="tab-content">
-            ---- ---- ★------ ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- ---- -------- ---- ----
-            ---- ★-- ---- ---- ------★ ---- ---- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- ---- ★------ ----
-            ---- ---- ----
-        </div>
-        <div id="tab-3" class="tab-content">
-            ---- ★-- -------- ---- ---- ---- -★- ---- ---- -------- ---- -★- ---- ---- ---- ---- -------- ---- ---- ----
-            ---- ---- --★ -------- ★-- ---- ---- ---- ---- ---- -------- ---- ---- --★ ---- ---- ---- -------- ---- ----
-            ---- --★
-        </div>
-
-    </div> -->
-    <section class="menu cid-rx3IEQFgmC" once="menu" id="menu04-a0" data-sortbtn="btn-primary">
-        <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg" id="navbar">
-            <ul class="tabs">
-                <li id="gSearch" class="tab-link current" data-tab="tab-1">일반 검색</li>
-                <li id="dSerach" class="tab-link" data-tab="tab-2">검색 필터</li>
-            </ul>
-            <!--TAB1-->
-            <div id="tab-1" class="tab-content2 current">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
-                    <input type="text" name="keyword" placeholder="keyword" data-form-field="keyword" class="form-control display-7" value="" id="keyword-formbuilder-2">
-                    <div class="icons-menu">
-                        <a href="searchResult.html" target="_blank">
-                            <span class="p-2 mbr-iconfont mobi-mbri-search mobi-mbri" style="color: rgb(87, 70, 139); fill: rgb(87, 70, 139);"></span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <!--TAB2-->
-            <div id="tab-2" class="tab-content2">
-                <input placeholder="시작 날짜" id="fromDate" type="text" class="form-control display-7" style="width: 30%; display: inline;">
-                <input placeholder="종료 날짜" id="toDate" type="text" class="form-control display-7" style="width: 30%; display: inline;">
-                <!-- <div class="icons-menu"> -->
-                <a href="searchResult.html" target="_blank">
-                    <span class="p-2 mbr-iconfont mobi-mbri-search mobi-mbri" style="color: rgb(87, 70, 139); fill: rgb(87, 70, 139);"></span>
-                </a>
-                <!-- DateTimePicker 위젯를 적용하기 위한 TextBox를 선언한다. -->
-                <!-- </div> -->
-                <!-- 여기 아래로 nav bar 하단에 들어갈 연관 검색어 들어감 -->
-                <!-- 연관검색어는 탭에 상관없이 들어감 -->
-            </div>
-            <div class="results">
-                <a>sample</a>
-                <a>automated</a>
-                <a>search</a>
-                <a>results</a>
-            </div>
-        </nav>
-    </section>
-    <!-- 좌측 툴바 -->
-    <section class="menu cid-rx3IEQFgmC" once="menu" id="menubarsection" data-sortbtn="btn-primary" style="background-color: #212529;">
-        <ul class="sidebar navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                    <h6 class="dropdown-header">Login Screens:</h6>
-                    <a class="dropdown-item" href="login.html">Login</a>
-                    <a class="dropdown-item" href="register.html">Register</a>
-                    <a class="dropdown-item" href="forgot-password.html">Forgot Password</a>
-                    <div class="dropdown-divider"></div>
-                    <h6 class="dropdown-header">Other Pages:</h6>
-                    <a class="dropdown-item" href="404.html">404 Page</a>
-                    <a class="dropdown-item" href="blank.html">Blank Page</a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
-            </li>
-        </ul>
-    </section>
-    <!-- 그래프및 메인 화면 -->
-    <!-- 중앙 큰 섹션 -->
-    <section id="rightsection">
-        <section class="accordion1 cid-rx3JXkfsaj" id="graphsection1" data-sortbtn="btn-primary">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 col-md-12">
-                        <div class="section-head text-center space30">
-                            <br><br><br><br><br><br>
-                            <h2 class="mbr-section-title pb-5 mbr-fonts-style display-2">요약해서 보여주기</h2>
-                            <div id="box">
-                                <div id="tester" style="width:100%;"></div>
-                                <script>
-                                TESTER = document.getElementById('tester');
-                                Plotly.plot(TESTER, [{
-                                    x: [1, 2, 3, 4, 5],
-                                    y: [1, 2, 4, 8, 16]
-                                }], {
-                                    margin: { t: 0 }
-                                });
-                                </script>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- 포털사이트별 상세 -->
-        <section class="tabs1 cid-rlqwGHIhAw" id="tabs02-96">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 col-md-12">
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li class="nav-item first"><a class="nav-link mbr-fonts-style active display-7" role="tab" data-toggle="tab" href="#tabs02-96_tab0" aria-selected="true">네이버</a></li>
-                            <li class="nav-item"><a class="nav-link mbr-fonts-style active display-7" role="tab" data-toggle="tab" href="#tabs02-96_tab1" aria-selected="true">다음</a></li>
-                            <li class="nav-item"><a class="nav-link mbr-fonts-style active display-7" role="tab" data-toggle="tab" href="#tabs02-96_tab2" aria-selected="true">
-                                    구글</a></li>
-                        </ul>
-                        <div class="tab-content">
-                            <div id="tab1" class="tab-pane in active" role="tabpanel">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <p class="mbr-text pt-4 mbr-fonts-style display-7">
-                                            <table border="2" class="table RelatedTable" style="float:right; margin-left:10px;">
-                                                <thead>
-                                                    <tr class="table-heads">
-                                                        <th class="head-item1 mbr-fonts-style display-7">
-                                                            순위</th>
-                                                        <th class="head-item mbr-fonts-style display-7">
-                                                            검색어</th>
-                                                        <th class="head-item mbr-fonts-style display-7">
-                                                            검색량</th>
-                                                    </tr>
-                                                <tbody>
-                                                    <tr class="table-heads">
-                                                        <td class="body-item1 mbr-fonts-style display-7">1</td>
-                                                        <td class="body-item mbr-fonts-style display-7">
-                                                            펜</td>
-                                                        <td class="body-item mbr-fonts-style display-7">
-                                                            1000</td>
-                                                    </tr>
-                                                    <tr class="table-heads">
-                                                        <td class="body-item1 mbr-fonts-style display-7">2</td>
-                                                        <td class="body-item mbr-fonts-style display-7">
-                                                            전자펜</td>
-                                                        <td class="body-item mbr-fonts-style display-7">
-                                                            20000
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                            <div id="naver" style="width:65%; float:left; margin-right:10px;"></div>
-                                <script>
-                                TESTER = document.getElementById('naver');
-                                Plotly.plot(TESTER, [{
-                                    x: [1, 2, 3, 4, 5],
-                                    y: [1, 2, 4, 8, 16]
-                                }], {
-                                    margin: { t: 0 }
-                                });
-                                </script>
-                                        </p>
+                                <!--TAB1-->
+                                <div id="tab-1" class="tab-content2 current">
+                                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                        <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
+                                        <input type="text" name="keyword" placeholder="keyword"
+                                            data-form-field="keyword" class="form-control display-7" value=""
+                                            id="keyword-formbuilder-2">
+                                        <div class="icons-menu">
+                                            <a href="searchResult.html" target="_blank">
+                                                <span class="p-2 mbr-iconfont mobi-mbri-search mobi-mbri"
+                                                    style="color: rgb(87, 70, 139); fill: rgb(87, 70, 139);"></span>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div id="tab2" class="tab-pane" role="tabpanel">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <p class="mbr-text pt-4 mbr-fonts-style display-7">
-                                        </p>
-                                    </div>
+                                <!--TAB2-->
+                                <div id="tab-2" class="tab-content2">
+                                    <input placeholder="시작 날짜" id="fromDate" type="text" class="form-control display-7"
+                                        style="width: 30%; display: inline;">
+                                    <input placeholder="종료 날짜" id="toDate" type="text" class="form-control display-7"
+                                        style="width: 30%; display: inline;">
+                                    <!-- <div class="icons-menu"> -->
+                                    <a href="searchResult.html" target="_blank">
+                                        <span class="p-2 mbr-iconfont mobi-mbri-search mobi-mbri"
+                                            style="color: rgb(87, 70, 139); fill: rgb(87, 70, 139);"></span>
+                                    </a>
+
+                                    <!-- DateTimePicker 위젯를 적용하기 위한 TextBox를 선언한다. -->
+                                    <!-- </div> -->
+                                    <!-- 여기 아래로 nav bar 하단에 들어갈 연관 검색어 들어감 -->
+                                    <!-- 연관검색어는 탭에 상관없이 들어감 -->
                                 </div>
-                            </div>
-                            <div id="tab3" class="tab-pane" role="tabpanel">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <p class="mbr-text pt-4 mbr-fonts-style display-7">
-                                        </p>
+                             
+                            </nav>
+                            </section>
+                            <!-- 좌측 툴바 -->
+                            <section class="menu cid-rx3IEQFgmC" once="menu" id="menubarsection"
+                                data-sortbtn="btn-primary" style="background-color: #212529;">
+                                <ul class="sidebar navbar-nav">
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="searchResult.html">
+                                            <i class="fas fa-fw fa-tachometer-alt"></i>
+                                            <span>Home</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-fw fa-folder"></i>
+                                            <span>Pages</span>
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                                            <!-- <h6 class="dropdown-header">Login Screens:</h6> -->
+                                            <a class="dropdown-item" href="Compare.html" style ="height:10%;width:200%;">KeywordCompare</a>
+                                            <!-- <div class="dropdown-divider"></div> -->
+                                    </li>
+                                    <img src="assets/images/JJTECH.png" alt="" title="" style ="width: 50%;height:50%" >
+                                    <!-- <li class="nav-item">
+                                        <a class="nav-link" href="charts.html">
+                                            <i class="fas fa-fw fa-chart-area"></i>
+                                            <span>Charts</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="tables.html">
+                                            <i class="fas fa-fw fa-table"></i>
+                                            <span>Tables</span></a>
+                                    </li> -->
+                                </ul>
+                            </section>
+                            <!-- 그래프및 메인 화면 -->
+                            <!-- 중앙 큰 섹션 -->
+                            <section id="rightsection">
+                                <section class="accordion1 cid-rx3JXkfsaj" id="graphsection1"
+                                    data-sortbtn="btn-primary">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-12 col-md-12">
+                                                <div class="section-head text-center space30">
+                                                    <br><br><br>
+                                                    <h2 class="mbr-section-title pb-5 mbr-fonts-style display-2">요약해서
+                                                        보여주기</h2>
+                                                    <div id="box">
+                                                        <div id="tester" style="width:100%;"></div>
+                                                        <script>
+                                                            TESTER = document.getElementById('tester');
+                                                            Plotly.plot(TESTER, [{
+                                                                x: [1, 2, 3, 4, 5],
+                                                                y: [1, 2, 4, 8, 16]
+                                                            }], {
+                                                                margin: { t: 0 }
+                                                            });
+                                                        </script>
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </section>
-    <!-- 
+                                </section>
+                                <!-- 포털사이트별 상세 -->
+                                <section class="tabs1 cid-rlqwGHIhAw" id="tabs02-96">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-12 col-md-12">
+                                                <ul class="nav nav-tabs" role="tablist">
+                                                    <li class="nav-item first"><a
+                                                            class="nav-link mbr-fonts-style active display-7" role="tab"
+                                                            data-toggle="tab" href="#tabs02-96_tab0"
+                                                            aria-selected="true">네이버</a></li>
+                                                    <li class="nav-item"><a
+                                                            class="nav-link mbr-fonts-style active display-7" role="tab"
+                                                            data-toggle="tab" href="#tabs02-96_tab1"
+                                                            aria-selected="true">다음</a></li>
+                                                    <li class="nav-item"><a
+                                                            class="nav-link mbr-fonts-style active display-7" role="tab"
+                                                            data-toggle="tab" href="#tabs02-96_tab2"
+                                                            aria-selected="true">
+                                                            구글</a></li>
+                                                </ul>
+                                                <div class="tab-content">
+                                                    <div id="tab1" class="tab-pane in active" role="tabpanel">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <p class="mbr-text pt-4 mbr-fonts-style display-7">
+                                                                    <table border="2" class="table RelatedTable"
+                                                                        style="float:right; margin-left:10px;">
+                                                                        <thead>
+                                                                            <tr class="table-heads">
+                                                                                <th
+                                                                                    class="head-item1 mbr-fonts-style display-7">
+                                                                                    순위</th>
+                                                                                <th
+                                                                                    class="head-item mbr-fonts-style display-7">
+                                                                                    검색어</th>
+                                                                                <th
+                                                                                    class="head-item mbr-fonts-style display-7">
+                                                                                    검색량</th>
+                                                                            </tr>
+                                                                        <tbody>
+                                                                            <tr class="table-heads">
+                                                                                <td
+                                                                                    class="body-item1 mbr-fonts-style display-7">
+                                                                                    1</td>
+                                                                                <td
+                                                                                    class="body-item mbr-fonts-style display-7">
+                                                                                    펜</td>
+                                                                                <td
+                                                                                    class="body-item mbr-fonts-style display-7">
+                                                                                    1000</td>
+                                                                            </tr>
+                                                                            <tr class="table-heads">
+                                                                                <td
+                                                                                    class="body-item1 mbr-fonts-style display-7">
+                                                                                    2</td>
+                                                                                <td
+                                                                                    class="body-item mbr-fonts-style display-7">
+                                                                                    전자펜</td>
+                                                                                <td
+                                                                                    class="body-item mbr-fonts-style display-7">
+                                                                                    20000
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                    <div id="naver"
+                                                                        style="width:65%; float:left; margin-right:10px;">
+                                                                    </div>
+                                                                    <script>
+                                                                        TESTER = document.getElementById('naver');
+                                                                        Plotly.plot(TESTER, [{
+                                                                            x: [1, 2, 3, 4, 5],
+                                                                            y: [1, 2, 4, 8, 16]
+                                                                        }], {
+                                                                            margin: { t: 0 }
+                                                                        });
+                                                                    </script>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="tab2" class="tab-pane" role="tabpanel">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <p class="mbr-text pt-4 mbr-fonts-style display-7">
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="tab3" class="tab-pane" role="tabpanel">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <p class="mbr-text pt-4 mbr-fonts-style display-7">
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </section>
+                            <!-- 
 </section>
     <section once="" class="cid-rEoHegd1JZ" id="footer01-0" data-sortbtn="btn-primary">
         <div class="container">
@@ -322,51 +563,116 @@
             </div>
         </div>
     </section> -->
-    <script src="assets/web/assets/jquery/jquery.min.js"></script>
-    <script src="assets/popper/popper.min.js"></script>
-    <script src="assets/tether/tether.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/dropdown/js/nav-dropdown.js"></script>
-    <script src="assets/dropdown/js/navbar-dropdown.js"></script>
-    <script src="assets/touchswipe/jquery.touch-swipe.min.js"></script>
-    <script src="assets/mbr-tabs/mbr-tabs.js"></script>
-    <script src="assets/mbr-switch-arrow/mbr-switch-arrow.js"></script>
-    <script src="assets/formstyler/jquery.formstyler.js"></script>
-    <script src="assets/formstyler/jquery.formstyler.min.js"></script>
-    <script src="assets/datepicker/jquery.datetimepicker.full.js"></script>
-    <script src="assets/smoothscroll/smooth-scroll.js"></script>
-    <script src="assets/theme/js/script.js"></script>
-    <script src="assets/formoid/formoid.min.js"></script>
+                            <script src="assets/web/assets/jquery/jquery.min.js"></script>
+                            <script src="assets/popper/popper.min.js"></script>
+                            <script src="assets/tether/tether.min.js"></script>
+                            <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+                            <script src="assets/dropdown/js/nav-dropdown.js"></script>
+                            <script src="assets/dropdown/js/navbar-dropdown.js"></script>
+                            <script src="assets/touchswipe/jquery.touch-swipe.min.js"></script>
+                            <script src="assets/mbr-tabs/mbr-tabs.js"></script>
+                            <script src="assets/mbr-switch-arrow/mbr-switch-arrow.js"></script>
+                            <script src="assets/formstyler/jquery.formstyler.js"></script>
+                            <script src="assets/formstyler/jquery.formstyler.min.js"></script>
+                            <script src="assets/datepicker/jquery.datetimepicker.full.js"></script>
+                            <script src="assets/smoothscroll/smooth-scroll.js"></script>
+                            <script src="assets/theme/js/script.js"></script>
+                            <script src="assets/formoid/formoid.min.js"></script>
 </body>
 
 </html>
 <script>
-// 선언한 TextBox에 DateTimePicker 위젯을 적용한다.
-$('#fromDate').datetimepicker({
-    language: 'ko', // 화면에 출력될 언어를 한국어로 설정한다.
-    pickTime: false, // 사용자로부터 시간 선택을 허용하려면 true를 설정하거나 pickTime 옵션을 생략한다.
-    defalutDate: new Date() // 기본값으로 오늘 날짜를 입력한다. 기본값을 해제하려면 defaultDate 옵션을 생략한다.
-});
+    // 선언한 TextBox에 DateTimePicker 위젯을 적용한다.
+    $('#fromDate').datetimepicker({
+        language: 'ko', // 화면에 출력될 언어를 한국어로 설정한다.
+        pickTime: false, // 사용자로부터 시간 선택을 허용하려면 true를 설정하거나 pickTime 옵션을 생략한다.
+        defalutDate: new Date() // 기본값으로 오늘 날짜를 입력한다. 기본값을 해제하려면 defaultDate 옵션을 생략한다.
+    });
 
-$('#toDate').datetimepicker({
-    language: 'ko',
-    pickTime: false,
-    defalutDate: new Date()
-});
-//맨위 검색창 탭 선택
-$(document).ready(function() {
+    $('#toDate').datetimepicker({
+        language: 'ko',
+        pickTime: false,
+        defalutDate: new Date()
+    });
+    //맨위 검색창 탭 선택
+    $(document).ready(function () {
 
-    $('ul.tabs li').click(function() { // tab 항목 선택시
-        var tab_id = $(this).attr('data-tab');
+        $('ul.tabs li').click(function () { // tab 항목 선택시
+            var tab_id = $(this).attr('data-tab');
 
-        $('ul.tabs li').removeClass('current'); //원래 선택된 항목지우고
-        $('.tab-content2').removeClass('current');
+            $('ul.tabs li').removeClass('current'); //원래 선택된 항목지우고
+            $('.tab-content2').removeClass('current');
 
-        $(this).addClass('current'); //현재 선택된 것 추가
-        $("#" + tab_id).addClass('current');
+            $(this).addClass('current'); //현재 선택된 것 추가
+            $("#" + tab_id).addClass('current');
+        })
+
     })
+    function view(arg) {
+        $(".time1, .time2, .time3, .time4, .ad1, .ad2, .ad3, .ad4").css("display", "none");
+        if (arg == "0") {
+            $(".time2, .ad2").css("display", "block");
+            viewcount = 1;
+        }
+        else if (arg == "1") {
+            $(".time3, .ad3").css("display", "block");
+            viewcount = 2;
+        }
+        else if (arg == "2") {
+            $(".time4, .ad4").css("display", "block");
+            viewcount = 3;
+        }
+        else if (arg == "3") {
+            $(".time1, .ad1").css("display", "block");
+            viewcount = 0;
+        }
+    }
+    var viewcount = 0;
+    var rtcarousel = setInterval(function () { view(viewcount) }, 3000);
 
-})
+    $("#best_search").mouseenter(function () {
+        clearInterval(rtcarousel);
+    });
+
+    $("#best_search").mouseleave(function () {
+        rtcarousel = setInterval(function () { view(viewcount) }, 3000);
+    });
+
+
+    .cssNumber.zoom = true;
+if (!("zoom" in document.body.style)) {
+    $.cssHooks.zoom = {
+        get: function(elem, computed, extra) {
+            var value = $(elem).data('zoom');
+            return value != null ? value : 1;
+        },
+        set: function(elem, value) {
+            var $elem = $(elem);
+            var size = { // without margin
+                width: $elem.outerWidth(),
+                height: $elem.outerWidth()
+            };
+            $elem.data('zoom', value);
+            if (value != 1) {
+                $elem.css({
+                    transform: 'scale(' + value + ')',
+                    marginLeft: (size.width * value - size.width) / 2,
+                    marginRight: (size.width * value - size.width) / 2,
+                    marginTop: (size.height * value - size.height) / 2,
+                    marginBottom: (size.height * value - size.height) / 2
+                });
+            } else {
+                $elem.css({
+                    transform: null,
+                    margin: null
+                });
+            }
+        }
+    };
+}
+
+$.cssHooks.zoom.set("body", 0.8);
+
 </script>
 <!-- // DateTimePicker 위젯은 기본적으로 TextBox이므로 아래와 같은 일반적인 방법으로 사용자가 입력한 날짜를 획득할 수 있다.
 var fromDate = $('#fromDate').val(); // '2014.01.01'

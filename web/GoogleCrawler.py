@@ -93,6 +93,7 @@ def listingAndDeleting(corpath, wrgpath):
 def rgoogleAndCal(y):
     z = list()
     normvalratio = sum(y) / len(y)
+    random.seed(420)
     normval = random.randrange(140000, 220000)
 
     for elem in y:

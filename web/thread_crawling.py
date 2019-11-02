@@ -12,30 +12,7 @@ driver = webdriver.Chrome('/Users/yubin/ChromeDriver/chromedriver4')  # 버전�
 wait = WebDriverWait(driver, 20)
 
 # thread 2
-def get_abs_value_and_related_keywords_daum(q, searchword): # 검색량 뽑아내는거
-
-    driver.get('https://clix.biz.daum.net/ad/proposal/keyword')
-    driver.find_element_by_xpath('//*[(@id = "userId")]').send_keys("anfidthtn")
-    driver.find_element_by_xpath('//*[(@id = "userPw")]').send_keys("asdf;lkj")
-    driver.find_element_by_class_name('btn_comm2.btn_login').click()  # 자동 클릭처리
-    #driver.implicitly_wait(2)
-    wait.until(
-        EC.presence_of_element_located((By.XPATH, '//*[(@id = "proposalSearchKeyword")]'))
-    )
-    driver.find_element_by_xpath('//*[(@id = "proposalSearchKeyword")]').send_keys(searchword)
-    driver.find_element_by_class_name('btn_comm.btn_inquiry').click()  # 자동 클릭처리
-    #driver.implicitly_wait(10)
-    # wait for the page to load
-    wait.until(
-        EC.presence_of_element_located((By.XPATH, '''//*[@class= "txt_ar"]'''))
-    )
-    abs_value = driver.find_element_by_xpath('''//*[@class= "txt_ar"]''')
-    abs_value = abs_value.text
-
-    buff = abs_value.split(",")
-    number = ''
-    for num in buff:
-        number += num
+def get_related_keywords_daum(searchword): # 검색량 뽑아내는거
 
     driver.get('https://search.daum.net/search?w=tot&DA=YZR&t__nil_searchbox=btn&sug=&sugo=&q='+searchword) #연관 검색어 출력
     results = driver.find_elements_by_xpath('//a[@class= "keyword"]')
@@ -45,26 +22,23 @@ def get_abs_value_and_related_keywords_daum(q, searchword): # 검색량 뽑아�
             realted.append(i.text)
     # json 만들기 (1) dictionary (2) 1을 json으로 변환
     daum = {
-        'count' : int(number),
+        'count' : 200000,
         'related' : realted
     }
-    wrapUp = {
-        'daum' : daum
-    }
+
     '''
     test_json_str = json.dumps(test)
     test_json_data = json.loads(test_json_str)
     print(test_json_data)
     print(test_json_data["daum"]["related"]) # 속성
     '''
-    q.put(wrapUp)
     return daum # dictionay 던짐
 
 
 # get_abs_value_and_related_keywords_daum("삼성")
 
 
-def get_abs_value_and_related_keywords_naver(searchword):
+def get_abs_value_naver(searchword):
     relatedKeywords = {}  # 연관 검색어 : [pc, mobile]
     publishVolumes = {}  # blog : 발행량, cafe : 발행량, knwlgin : 발행량
 
@@ -191,7 +165,7 @@ def FindRecentMonth():
 # thread 1
 # 최종적으로 검색할 것 입력하면 기간, 비율, 검색량으로
 
-def search_naver(q, searchword): # 네이버 검색
+def search_naver(searchword): # 네이버 검색
     # 17년 1월 ~ 4월 검색한다 치면
     # 17년 1월 ~ 현재 시점의 가장 최근 달까지 구하고
     # 가장 최근 달의 진짜 검색량을 바탕으로
@@ -210,10 +184,26 @@ def search_naver(q, searchword): # 네이버 검색
     # Searchword = read_in()
     # Keyword = Searchword["keyword"]
     # Keyword = sys.argv[1]
+
+    try:
+        Keyword = sys.argv[1]
+    except:
+        Keyword = "치킨"
+
+    try:
+        StartDate = sys.argv[2]
+    except:
+        StartDate = "2016-01-01"
+
+    try:
+        EndDate = sys.argv[3]
+    except:
+        EndDate = FindRecentMonth()
+    
     FullDatalist = SectionSearch(StartDate, FindRecentMonth(), Keyword, DeviceType)
     # 실제 최근 1달 검색량은 나중에 구하는 것으로 (현재는 데이터가 없어서 1000으로 둠)
 
-    rk, pb = get_abs_value_and_related_keywords_naver(Keyword) # 둘 다 dictionary
+    rk, pb = get_abs_value_naver(Keyword) # 둘 다 dictionary
 
     # 숫자 , 있는 거 parsing
     for k in rk.keys():
@@ -255,9 +245,7 @@ def search_naver(q, searchword): # 네이버 검색
         'graphData' : FinalDatalist,
         'related' : rk
     }
-    wrapUp = {
-        'naver' : naver
-    }
+
     '''
     test_json_str = json.dumps(test)
     print(test_json_str)
@@ -266,7 +254,6 @@ def search_naver(q, searchword): # 네이버 검색
     print(test_json_data["naver"]["graphData"]) # 속성
     print(test_json_data["naver"]["related"])  # 속성
     '''
-    q.put(wrapUp)
     return naver # dictionay 던짐
 
 
@@ -287,10 +274,9 @@ from selenium.webdriver.support import expected_conditions as EC
 
 if __name__ == '__main__':
     keyword = sys.argv[1]
-    result_queue = Queue()
     final = {}
-    final["daum"] = get_abs_value_and_related_keywords_daum(result_queue, keyword)
-    final["naver"] = search_naver(result_queue, keyword)
+    final["daum"] = get_related_keywords_daum(keyword)
+    final["naver"] = search_naver(keyword)
     final_json_str = json.dumps(final)
     print(final_json_str)
     

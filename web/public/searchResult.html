@@ -32,10 +32,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.2/moment-with-locales.min.js"></script>
     <script
         src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/js/bootstrap-datetimepicker.min.js"></script>
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
     <style>
         /* 연관검색어 목록 css */
         @import url(https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css);
@@ -203,13 +199,12 @@
             color: #222;
         }
 
-        .tab-content {
+        .tab-content2 {
             display: none;
-            /* background: #ededed; */
             padding: 15px;
         }
 
-        .tab-content.current {
+        .tab-content2.current {
             display: inherit;
             flex: 7;
         }
@@ -221,8 +216,8 @@
         }
 
         .RelatedTable {
-            font-weight: bold;
-            width: 200px;
+            /* font-weight: bold; */
+            width: 30%;
             height: 200px;
             text-align: center;
             
@@ -257,7 +252,6 @@
             flex: 1;
         }
     </style>
-
 </head>
 
 <body>
@@ -354,278 +348,6 @@
                                     <li id="dSerach" class="tab-link" data-tab="tab-2">검색 필터</li>
                                 </ul>
 
-<<<<<<< Updated upstream
-    </div> -->
-
-
-
-
-
-    <section class="menu cid-rx3IEQFgmC" once="menu" id="menu04-a0" data-sortbtn="btn-primary">
-        <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg" id="navbar">
-            <ul class="tabs">
-                <li class="tab-link current" data-tab="tab-1">일반 검색</li>
-                <li class="tab-link" data-tab="tab-2">날짜 검색</li>
-            </ul>
-            <!--TAB1-->
-            <div id="tab-1" class="tab-content current">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
-                    <input type="text" name="keyword" placeholder="keyword" data-form-field="keyword"
-                        class="form-control display-7" value="" id="keyword-formbuilder-2">
-                    <div class="icons-menu">
-                        <a href="searchResult.html" target="_blank">
-                            <span class="p-2 mbr-iconfont mobi-mbri-search mobi-mbri"
-                                style="color: rgb(87, 70, 139); fill: rgb(87, 70, 139);"></span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <!--TAB2-->
-            <div id="tab-2" class="tab-content">
-                <input id="fromDate" type="text">
-                <input id="toDate" type="text">
-                <!-- <div class="icons-menu"> -->
-                <a href="searchResult.html" target="_blank">
-                    <span class="p-2 mbr-iconfont mobi-mbri-search mobi-mbri"
-                        style="color: rgb(87, 70, 139); fill: rgb(87, 70, 139);"></span>
-                </a>
-                <!-- DateTimePicker 위젯를 적용하기 위한 TextBox를 선언한다. -->
-
-                <!-- </div> -->
-                <!-- 여기 아래로 nav bar 하단에 들어갈 연관 검색어 들어감 -->
-                <!-- 연관검색어는 탭에 상관없이 들어감 -->
-
-            </div>
-            <div class="results">
-                <a>sample</a>
-                <a>automated</a>
-                <a>search</a>
-                <a>results</a>
-            </div>
-
-        </nav>
-
-
-
-
-
-    </section>
-
-    <!-- 좌측 툴바 -->
-    <section class="menu cid-rx3IEQFgmC" once="menu" id="menubarsection" data-sortbtn="btn-primary">
-        <ul class="sidebar navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                    <h6 class="dropdown-header">Login Screens:</h6>
-                    <a class="dropdown-item" href="login.html">Login</a>
-                    <a class="dropdown-item" href="register.html">Register</a>
-                    <a class="dropdown-item" href="forgot-password.html">Forgot Password</a>
-                    <div class="dropdown-divider"></div>
-                    <h6 class="dropdown-header">Other Pages:</h6>
-                    <a class="dropdown-item" href="404.html">404 Page</a>
-                    <a class="dropdown-item" href="blank.html">Blank Page</a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
-            </li>
-        </ul>
-    </section>
-
-
-
-
-
-
-    <!-- 그래프및 메인 화면 -->
-    <!-- 중앙 큰 섹션 -->
-    <section id="rightsection">
-        <section class="accordion1 cid-rx3JXkfsaj" id="graphsection1" data-sortbtn="btn-primary">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 col-md-12">
-                        <div class="section-head text-center space30">
-                            <br><br><br><br><br><br>
-                            <h2 class="mbr-section-title pb-5 mbr-fonts-style display-2">요약해서 보여주기</h2>
-                            <div id="box">
-                                <div id="tester" style="width:100%;"></div>
-                                <script>
-                                    TESTER = document.getElementById('tester');
-                                    Plotly.plot(TESTER, [{
-                                        x: [1, 2, 3, 4, 5],
-                                        y: [1, 2, 4, 8, 16]
-                                    }], {
-                                        margin: { t: 0 }
-                                    });
-                                </script>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- 포털사이트별 상세 -->
-        <section class="accordion1 cid-rx3JXkfsaj" id="graphsection2" data-sortbtn="btn-primary">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 col-md-12">
-                        <div class="section-head text-center space30">
-                            <h2 class="mbr-section-title pb-5 mbr-fonts-style display-2">
-                                포털사이트 별 상세 내역</h2>
-                        </div>
-                        <div class="clearfix"></div>
-                        <div id="bootstrap-accordion_18" class="panel-group accordionStyles accordion" role="tablist"
-                            aria-multiselectable="true">
-                            <div class="card">
-                                <div class="card-header" role="tab" id="headingOne">
-                                    <a role="button" class="panel-title collapsed" data-toggle="collapse" data-core=""
-                                        href="#collapse1_18" aria-expanded="false" aria-controls="collapse1">
-                                        <h4 class="mbr-fonts-style display-5">
-                                            <span class="sign mbr-iconfont mbri-arrow-down inactive"></span>네이버
-                                        </h4>
-                                    </a>
-                                </div>
-
-                                <div id="collapse1_18" class="panel-collapse noScroll collapse" role="tabpanel"
-                                    aria-labelledby="headingOne" data-parent="#bootstrap-accordion_18">
-                                    <div class="panel-body p-4">
-                                        <p class="mbr-fonts-style panel-text display-7">
-                                            <!-- 관련 세부 사항 -->
-                                            <table border="2" class="RelatedTable">
-                                                <tr>
-                                                    <td>순위</td>
-                                                    <td>검색어</td>
-                                                    <td>검색량</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>펜</td>
-                                                    <td>10000</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>전자펜</td>
-                                                    <td>2000</td>
-                                                </tr>
-                                            </table>
-
-
-
-                                        </p>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="card">
-                                <div class="card-header" role="tab" id="headingTwo">
-                                    <a role="button" class="collapsed panel-title" data-toggle="collapse" data-core=""
-                                        href="#collapse2_18" aria-expanded="false" aria-controls="collapse2">
-                                        <h4 class="mbr-fonts-style display-5">
-                                            <span class="sign mbr-iconfont mbri-arrow-down inactive"></span>구글
-                                        </h4>
-                                    </a>
-                                </div>
-                                <div id="collapse2_18" class="panel-collapse noScroll collapse" role="tabpanel"
-                                    aria-labelledby="headingTwo" data-parent="#bootstrap-accordion_18">
-                                    <div class="panel-body p-4">
-                                        <p class="mbr-fonts-style panel-text display-7">
-                                            <!-- 관련 세부 사항 -->
-                                            <html>
-
-                                            <head>
-                                                <meta charset="utf-8">
-                                            </head>
-
-                                            <body>
-                                                <table border="2" class="RelatedTable">
-                                                    <tr>
-                                                        <td>순위</td>
-                                                        <td>검색어</td>
-                                                        <td>검색량</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>펜</td>
-                                                        <td>10000</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>2</td>
-                                                        <td>전자펜</td>
-                                                        <td>2000</td>
-                                                    </tr>
-                                                </table>
-                                            </body>
-
-                                            </html>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-header" role="tab" id="headingThree">
-                                    <a role="button" class="collapsed panel-title" data-toggle="collapse" data-core=""
-                                        href="#collapse3_18" aria-expanded="false" aria-controls="collapse3">
-                                        <h4 class="mbr-fonts-style display-5">
-                                            <span class="sign mbr-iconfont mbri-arrow-down inactive"></span>다음
-                                        </h4>
-                                    </a>
-                                </div>
-                                <div id="collapse3_18" class="panel-collapse noScroll collapse" role="tabpanel"
-                                    aria-labelledby="headingThree" data-parent="#bootstrap-accordion_18">
-                                    <div class="panel-body p-4">
-                                        <p class="mbr-fonts-style panel-text display-7">
-                                            <!-- 관련 세부 사항 -->
-                                            <html>
-
-                                            <head>
-                                                <meta charset="utf-8">
-                                            </head>
-
-                                            <body>
-                                                <table border="2" class="RelatedTable">
-                                                    <tr>
-                                                        <td>순위</td>
-                                                        <td>검색어</td>
-                                                        <td>검색량</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>펜</td>
-                                                        <td>10000</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>2</td>
-                                                        <td>전자펜</td>
-                                                        <td>2000</td>
-                                                    </tr>
-                                                </table>
-                                            </body>
-
-                                            </html>
-                                        </p>
-=======
                                 <!--TAB1-->
                                 <div id="tab-1" class="tab-content2 current">
                                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -728,7 +450,6 @@
                                                 <div class="clearfix"></div>
                                             </div>
                                         </div>
->>>>>>> Stashed changes
                                     </div>
                                 </section>
                                 <!-- 포털사이트별 상세 -->
@@ -865,8 +586,6 @@
 </body>
 
 </html>
-
-
 <script>
     // 선언한 TextBox에 DateTimePicker 위젯을 적용한다.
     $('#fromDate').datetimepicker({
@@ -883,19 +602,6 @@
     //맨위 검색창 탭 선택
     $(document).ready(function () {
 
-<<<<<<< Updated upstream
-        $('ul.tabs li').click(function () {// tab 항목 선택시
-            var tab_id = $(this).attr('data-tab');
-
-            $('ul.tabs li').removeClass('current');//원래 선택된 항목지우고
-            $('.tab-content').removeClass('current');
-
-            $(this).addClass('current');//현재 선택된 것 추가
-            $("#" + tab_id).addClass('current');
-        })
-
-    })
-=======
         $('ul.tabs li').click(function () { // tab 항목 선택시
             var tab_id = $(this).attr('data-tab');
 
@@ -937,9 +643,7 @@
         rtcarousel = setInterval(function () { view(viewcount) }, 3000);
     });
 
->>>>>>> Stashed changes
 </script>
-
 <!-- // DateTimePicker 위젯은 기본적으로 TextBox이므로 아래와 같은 일반적인 방법으로 사용자가 입력한 날짜를 획득할 수 있다.
 var fromDate = $('#fromDate').val(); // '2014.01.01'
 var toDate = $('#toDate').val(); // '2014.12.31'

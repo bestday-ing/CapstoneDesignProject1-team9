@@ -76,20 +76,31 @@ def Search():
     # (최근검색량 / 최근달 비율) * 검색량 구할 달 해서
     # 17년 1월 ~ 4월의 월간 검색량을 구하도록
 
-        # 시작 범위
-    StartDate = "2016-01-01"
-    # 끝 범위
-    EndDate = "2018-11-30"
     # 검색어
     #Keyword = "검색어"
     # "pc" or "mo" or 비워두면("") 둘다
     DeviceType = ""
 
-
+    StartDate = "2016-01-01"
+    EndDate = "2018-11-30"
 
     # Searchword = read_in()
     # Keyword = Searchword["keyword"]
-    Keyword = sys.argv[1]
+    try:
+        Keyword = sys.argv[1]
+    except:
+        Keyword = "치킨"
+
+    try:
+        StartDate = sys.argv[2]
+    except:
+        StartDate = "2016-01-01"
+
+    try:
+        EndDate = sys.argv[3]
+    except:
+        EndDate = FindRecentMonth()
+
     FullDatalist = SectionSearch(StartDate, FindRecentMonth(), Keyword, DeviceType)
     # 실제 최근 1달 검색량은 나중에 구하는 것으로 (현재는 데이터가 없어서 1000으로 둠)
     
@@ -120,7 +131,7 @@ def Search():
         FinalDatalist.append(i)
     # FinalDatalist에는 [[기간1, 비율1, 검색량1], [기간2, 비율2, 검색량2], ... ] 로 구성, 기간은 1달 단위
     print(FinalDatalist)
-    # SaveExcel(FinalDatalist)
+    SaveExcel(FinalDatalist)
 
     
 

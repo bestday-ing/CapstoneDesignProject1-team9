@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
     <link rel="shortcut icon" href="../public/assets/images/logo2.png" type="image/x-icon">
     <meta name="description" content="">
-    <title>site name</title>
+    <title>Master Search</title>
     <link rel="stylesheet" href="../public/assets/web/assets/mobirise-icons/mobirise-icons.css">
     <link rel="stylesheet" href="../public/assets/web/assets/mobirise-icons2/mobirise2.css">
     <link rel="stylesheet" href="../public/assets/tether/tether.min.css">
@@ -396,8 +396,17 @@
                                     array.forEach(function (item, index, array) {
                                        array[index] = "\'"+ item + "\'"; // 정말 정말 중요! '를 붙여줌 흑흑,,
                                     });
-                                    console.log(array);
+                                    // console.log(array);
                                 %>
+                                                                      
+                                var garray = [];
+                                <%
+                                    garray = dataSet.google.graphData.period;
+                                    garray.forEach(function (item, index, array) {
+                                        garray[index] = "\'"+ item + "\'"; // 정말 정말 중요! '를 붙여줌 흑흑,,
+                                    });
+                                %>
+                                    
 
                                 var today = new Date();
                                 var dd = String(today.getDate()).padStart(2, '0');
@@ -419,8 +428,15 @@
                                     mode: 'lines+markers',
                                     type: 'scatter'
                                 };
-
-                                var data = [daum, naver];
+                                    
+                                var google = {
+                                    x: [<%- garray  %>], // 기간
+                                    y: [<%= dataSet.google.graphData.count %>], // 검색량
+                                    mode: 'lines+markers',
+                                    type: 'scatter'
+                                };
+                                
+                                var data = [daum, naver, google];
                                 TESTER = document.getElementById('tester');
                                 Plotly.newPlot(TESTER, data);
                                 </script>
@@ -444,6 +460,7 @@
                                     구글</a></li>
                         </ul>
                         <div class="tab-content">
+                            
                             <div id="tab1" class="tab-pane in active" role="tabpanel">
                                 <div class="row">
                                     <div class="col-md-12">
@@ -467,7 +484,7 @@
                                                         relatedKeys = Object.keys(dataSet.naver.related);
                                                         for(var i = 0; i<10; i++)
                                                         {
-                                                            console.log(dataSet.naver.related[relatedKeys[i]]);
+                                                            //console.log(dataSet.naver.related[relatedKeys[i]]);
                                                             var relatedCount = dataSet.naver.related[relatedKeys[i]];           
                                                             pcNaver[i] = relatedCount[0];
                                                             mobileNaver[i] = relatedCount[1];
@@ -493,17 +510,13 @@
                                             <div id="naver" style="width:65%; float:left; margin-right:10px;"></div>
                                             <script>
                                             naver_id = document.getElementById('naver');
-                                            Plotly.plot(naver_id, [{
-                                                x: [<%- array %>], // 기간
-                                                y: [<%= dataSet.naver.graphData.count %>], // 검색량
-                                                mode: 'lines + markers',
-                                                type: 'scatter'
-                                            }]);
+                                            Plotly.newPlot(naver_id, [naver]);
                                             </script>
                                         </p>
                                     </div>
                                 </div>
                             </div>
+                        
                             <div id="tab2" class="tab-pane" role="tabpanel">
                                 <div class="row">
                                     <div class="col-md-12">
@@ -518,7 +531,7 @@
                                                     </tr>
                                                 <tbody>
                                                     <% 
-                                                        console.log(dataSet.daum.related);
+                                                        // console.log(dataSet.daum.related);
                                                         for (var i =0; i<dataSet.daum.related.length; i++){
                                                         var related = dataSet.daum.related[i];
                                                     %>
@@ -537,10 +550,58 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="tab3" class="tab-pane" role="tabpanel">
+                            
+                      <div id="tab3" class="tab-pane" role="tabpanel">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <p class="mbr-text pt-4 mbr-fonts-style display-7">
+                                            <table border="2" class="table RelatedTable" style="float:right; margin-left:10px;">
+                                                <thead>
+                                                    <tr class="table-heads">
+                                                        <th class="head-item1 mbr-fonts-style display-7">
+                                                            순위</th>
+                                                        <th class="head-item mbr-fonts-style display-7">
+                                                            검색어</th>
+                                                        <th class="head-item mbr-fonts-style display-7">
+                                                            PC 검색량</th>
+                                                        <th class="head-item mbr-fonts-style display-7">
+                                                            모바일 검색량</th>
+                                                    </tr>
+                                                <tbody>
+                                                    <% 
+                                                        var pcNaver = [];
+                                                        var mobileNaver = [];
+                                                        relatedKeys = Object.keys(dataSet.naver.related);
+                                                        for(var i = 0; i<10; i++)
+                                                        {
+                                                            //console.log(dataSet.naver.related[relatedKeys[i]]);
+                                                            var relatedCount = dataSet.naver.related[relatedKeys[i]];           
+                                                            pcNaver[i] = relatedCount[0];
+                                                            mobileNaver[i] = relatedCount[1];
+                                                        
+                                                    %>
+                                                    <tr class="table-heads">
+                                                        <td class="body-item1 mbr-fonts-style display-7">
+                                                            <%=i+1 %>
+                                                        </td>
+                                                        <td class="body-item mbr-fonts-style display-7">
+                                                            <%=relatedKeys[i] %>
+                                                        </td>
+                                                        <td class="body-item mbr-fonts-style display-7">
+                                                            <%=pcNaver[i] %>
+                                                        </td>
+                                                        <td class="body-item mbr-fonts-style display-7">
+                                                            <%=mobileNaver[i] %>
+                                                        </td>
+                                                    </tr>
+                                                    <% } %>
+                                                </tbody>
+                                            </table>
+                                            <div id="go" style="width:65%; float:left; margin-right:10px;"></div>
+                                            <script>
+                                            g_id = document.getElementById('go');
+                                            Plotly.newPlot(g_id, [google]);
+                                            </script>
                                         </p>
                                     </div>
                                 </div>
@@ -549,6 +610,11 @@
                     </div>
                 </div>
             </div>
+    <div id="go" style="width:65%; float:left; margin-right:10px;"></div>
+                                            <script>
+                                            g_id = document.getElementById('go');
+                                            Plotly.newPlot(g_id, [google]);
+                                            </script>
         </section>
     </section>
     <!-- 하단 메뉴 바
@@ -611,22 +677,18 @@ $(document).ready(function() {
 
 })
 
-function view(arg) {
-    $(".time1, .time2, .time3, .time4, .ad1, .ad2, .ad3, .ad4").css("display", "none");
-    if (arg == "0") {
-        $(".time2, .ad2").css("display", "block");
-        viewcount = 1;
-    } else if (arg == "1") {
-        $(".time3, .ad3").css("display", "block");
-        viewcount = 2;
-    } else if (arg == "2") {
-        $(".time4, .ad4").css("display", "block");
-        viewcount = 3;
-    } else if (arg == "3") {
-        $(".time1, .ad1").css("display", "block");
-        viewcount = 0;
+    function view(arg) {
+        $(".time1, .time2, .ad1, .ad2").css("display", "none");
+        // $(".time1, .time2, .time3, .time4, .ad1, .ad2, .ad3, .ad4").css("display", "none");
+        if (arg == "0") {
+            $(".time2, .ad2").css("display", "block");
+            viewcount = 1;
+        }
+        else if (arg == "1") {
+            $(".time1, .ad1").css("display", "block");
+            viewcount = 0;
+        }
     }
-}
 var viewcount = 0;
 var rtcarousel = setInterval(function() { view(viewcount) }, 3000);
 

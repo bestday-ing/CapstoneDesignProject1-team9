@@ -21,12 +21,12 @@ var showResults = function(req, res) {
         pythonPath: './venv/bin/python',
         pythonOptions: ['-u'],
         scriptPath: '',
-        args: [keyword]
+        args: [keyword, startDate, endDate]
     };
 
-    PythonShell.run('thread_crawling.py', options, function(err, results) {
+    PythonShell.run('data_processing.py', options, function(err, results) {
     if (err) throw err;
-    //results[0] : "['test.py', 'value1', 'value2', 'value3', 'a', 'b', 'c']"
+        
     if(results[0]=='성공'){
         console.log()
         var obj = JSON.parse(results[1]);
@@ -46,8 +46,7 @@ var showResults = function(req, res) {
             'period' : NaverPeriod,
             'count' : NaverCount
         }
-
-        console.log(obj.naver) //이게 그 기존의 배열
+        
 
         var context = { keyword: keyword, dataSet : obj };
         req.app.render("searchResult.ejs", context, function(err, html) {

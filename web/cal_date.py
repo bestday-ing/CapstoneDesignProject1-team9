@@ -30,3 +30,14 @@ def FindRecentMonth():
     RecentMonth += '-' + str(lastDay(year, month))
 
     return RecentMonth
+
+def oneYearsAgo():
+    now = datetime.datetime.now()
+    year = now.year
+    month = now.month
+    day = now.day
+
+    oneYearsAgoDate = datetime.date(year - 1, month, day)
+
+
+    return oneYearsAgoDate.strftime("%Y-%m-%d")

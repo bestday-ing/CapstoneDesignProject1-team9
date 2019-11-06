@@ -29,8 +29,8 @@ var showResults = function(req, res) {
         
     if(results[0]=='성공'){
         console.log()
-        var obj = JSON.parse(results[1]);
-        console.log(obj)
+        var obj = JSON.parse(results[1]); //JSON object
+        //console.log(obj)
         //console.log(obj.naver.graphData) //이게 그 기존의 배열
 
         var NaverPeriod = [];
@@ -47,6 +47,11 @@ var showResults = function(req, res) {
             'count' : NaverCount
         }
         
+        
+        string = JSON.stringify(obj);
+        obj["JSONString"] = string;
+        //obj["keyword"] = keyword;
+        console.log(obj);
 
         var context = { keyword: keyword, dataSet : obj };
         req.app.render("searchResult.ejs", context, function(err, html) {

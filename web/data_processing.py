@@ -83,7 +83,8 @@ def search_google(searchword):  # 네이버 검색
 def search_daum(searchword):  # 네이버 검색
 
     rk = get_related_keywords_daum(keyword)
-    count = get_abs_value_daum(keyword)
+    # count = get_abs_value_daum(keyword)
+    count = 1000000 # 일단 임의의 값 나중에 없앨까 싶다.
 
     daum = {
         'count' : count,
@@ -99,7 +100,8 @@ if __name__ == '__main__':
     try:
         startDate = sys.argv[2]
         if(startDate=="undefined"):
-            startDate = "2016-01-01"
+            # startDate = "2016-01-01"
+            startDate = oneYearsAgo()
     except:
         startDate = "2016-01-01"
 

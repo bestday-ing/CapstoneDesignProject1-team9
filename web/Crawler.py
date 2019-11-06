@@ -25,7 +25,7 @@ import os
 ''' 다음 '''
 def get_abs_value_daum(searchword): # 광고주 로그인 세션 유지하는 방향으로 생각해보기
     try:
-        driver = webdriver.Chrome('/Users/yubin/ChromeDriver/chromedriver4')  # 맥 경로, 불필요시 주석 처리바람
+        driver = webdriver.Chrome('./chromedriver4')  # 맥 경로, 불필요시 주석 처리바람
     except:
         driver = webdriver.Chrome('./chromedriver_77.exe')  # 버전에 따라 수정해서
     wait = WebDriverWait(driver, 20)
@@ -58,7 +58,7 @@ def get_abs_value_daum(searchword): # 광고주 로그인 세션 유지하는 �
 
 def get_related_keywords_daum(searchword): # 검색량 뽑아내는거
     try:
-        driver = webdriver.Chrome('/Users/yubin/ChromeDriver/chromedriver4')  # 맥 경로, 불필요시 주석 처리바람
+        driver = webdriver.Chrome('./chromedriver4')  # 맥 경로, 불필요시 주석 처리바람
     except:
         driver = webdriver.Chrome('./chromedriver_77.exe')  # 버전에 따라 수정해서
     wait = WebDriverWait(driver, 20)
@@ -78,7 +78,7 @@ def get_related_keywords_daum(searchword): # 검색량 뽑아내는거
 ''' 네이버 '''
 def get_abs_value_and_related_keywords_naver(searchword):
     try:
-        driver = webdriver.Chrome('/Users/yubin/ChromeDriver/chromedriver4')  # 맥 경로, 불필요시 주석 처리바람
+        driver = webdriver.Chrome('./chromedriver4')  # 맥 경로, 불필요시 주석 처리바람
     except:
         driver = webdriver.Chrome('./chromedriver_77.exe')  # 버전에 따라 수정해서
     wait = WebDriverWait(driver, 20)
@@ -161,7 +161,7 @@ def crawlingAndDownloading(word, path):
     options.add_argument('--window-position=0,0')
 
     try:
-        driver = webdriver.Chrome('/Users/yubin/ChromeDriver/chromedriver4')  # 맥 경로, 불필요시 주석 처리바람
+        driver = webdriver.Chrome('./chromedriver4')  # 맥 경로, 불필요시 주석 처리바람
     except:
         driver = webdriver.Chrome('./chromedriver_77.exe')  # 버전에 따라 수정해서
 

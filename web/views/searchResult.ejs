@@ -464,9 +464,9 @@
                                     line: {color: '#4285F4'}
                                 };
                                 
-                                var data = [naver, google];
+                                var summary_data = [naver, google];
                                 TESTER = document.getElementById('tester');
-                                Plotly.newPlot(TESTER, data);
+                                Plotly.newPlot(TESTER, summary_data);
                                 </script>
                             </div>
                         </div>
@@ -490,11 +490,12 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <p class="mbr-text pt-4 mbr-fonts-style display-7">
-                                            <div id="naver" style="width:65%; margin-right:10px;"></div>
+                                            <div id="naver" style="width:100%; margin-right:10px;"></div>
                                             <script>
                                             naver_id = document.getElementById('naver');
                                             Plotly.newPlot(naver_id, [naver]);
                                             </script>
+                                            <input id='graphChange' type="button" value="펼쳐서 보기">
                                             <div id="naverKeyword" style="width:100%; margin-right:10px;"></div>
                                             <% 
                                                 var pcNaver = [];
@@ -536,10 +537,9 @@
                                                     color: '#ff9999',
                                                   }
                                             };
-                                            var data = [PC, Mobile];
-                                            var layout = {barmode: 'group'};
-                                            var layout2 = {barmode: 'stack'};
-                                            Plotly.newPlot(naver_id, data, layout2);
+                                            var M_PC_data = [PC, Mobile];
+                                            var layout = {barmode: 'stack'};
+                                            Plotly.newPlot(naver_id, M_PC_data, layout);
                                             </script> 
                                         </p>
                                     </div>
@@ -650,3 +650,20 @@ $("#best_search").mouseleave(function() {
     rtcarousel = setInterval(function() { view(viewcount) }, 3000);
 });
 </script>
+
+        
+<script type="text/javascript">
+  $(document).ready(function(){
+      
+      $(document).on("click","#graphChange",function(event){ //graph 바뀜
+        var layout2 = {barmode: 'group'};  
+        if(layout.barmode == layout2.barmode)
+            layout = {barmode: 'stack'}; 
+        else
+            layout = layout2;   
+        Plotly.newPlot(naver_id, M_PC_data, layout);
+      });
+  });// end of ready()
+
+</script>
+

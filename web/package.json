@@ -12,8 +12,9 @@
     "express": "^4.14.0",
     "express-error-handler": "^1.1.0",
     "express-session": "^1.14.2",
-    "python-shell": "^1.0.8",
+    "google-trends-api": "^4.9.0",
     "mongoose": "^5.7.5",
+    "python-shell": "^1.0.8",
     "serve-static": "^1.11.2"
   }
 }

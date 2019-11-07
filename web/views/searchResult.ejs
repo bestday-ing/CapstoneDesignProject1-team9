@@ -482,9 +482,7 @@
                     <div class="col-12 col-md-12">
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item first"><a class="nav-link mbr-fonts-style active display-7" role="tab" data-toggle="tab" href="#tabs02-96_tab0" aria-selected="true">네이버</a></li>
-                            <li class="nav-item"><a class="nav-link mbr-fonts-style active display-7" role="tab" data-toggle="tab" href="#tabs02-96_tab1" aria-selected="true">다음</a></li>
-                            <li class="nav-item"><a class="nav-link mbr-fonts-style active display-7" role="tab" data-toggle="tab" href="#tabs02-96_tab2" aria-selected="true">
-                                    구글</a></li>
+                            <li class="nav-item"><a class="nav-link mbr-fonts-style active display-7" role="tab" data-toggle="tab" href="#tabs02-96_tab1" aria-selected="true">구글</a></li>
                         </ul>
                         <div class="tab-content">
                             
@@ -492,139 +490,72 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <p class="mbr-text pt-4 mbr-fonts-style display-7">
-                                            <table border="2" class="table RelatedTable" style="float:right; margin-left:10px;">
-                                                <thead>
-                                                    <tr class="table-heads">
-                                                        <th class="head-item1 mbr-fonts-style display-7">
-                                                            순위</th>
-                                                        <th class="head-item mbr-fonts-style display-7">
-                                                            검색어</th>
-                                                        <th class="head-item mbr-fonts-style display-7">
-                                                            PC 검색량</th>
-                                                        <th class="head-item mbr-fonts-style display-7">
-                                                            모바일 검색량</th>
-                                                    </tr>
-                                                <tbody>
-                                                    <% 
-                                                        var pcNaver = [];
-                                                        var mobileNaver = [];
-                                                        relatedKeys = Object.keys(dataSet.naver.related);
-                                                        for(var i = 0; i<10; i++)
-                                                        {
-                                                            //console.log(dataSet.naver.related[relatedKeys[i]]);
-                                                            var relatedCount = dataSet.naver.related[relatedKeys[i]];           
-                                                            pcNaver[i] = relatedCount[0];
-                                                            mobileNaver[i] = relatedCount[1];
-                                                        
-                                                    %>
-                                                    <tr class="table-heads">
-                                                        <td class="body-item1 mbr-fonts-style display-7">
-                                                            <%=i+1 %>
-                                                        </td>
-                                                        <td class="body-item mbr-fonts-style display-7">
-                                                            <%=relatedKeys[i] %>
-                                                        </td>
-                                                        <td class="body-item mbr-fonts-style display-7">
-                                                            <%=pcNaver[i] %>
-                                                        </td>
-                                                        <td class="body-item mbr-fonts-style display-7">
-                                                            <%=mobileNaver[i] %>
-                                                        </td>
-                                                    </tr>
-                                                    <% } %>
-                                                </tbody>
-                                            </table>
-                                            <div id="naver" style="width:65%; float:left; margin-right:10px;"></div>
+                                            <div id="naver" style="width:65%; margin-right:10px;"></div>
                                             <script>
                                             naver_id = document.getElementById('naver');
                                             Plotly.newPlot(naver_id, [naver]);
                                             </script>
+                                            <div id="naverKeyword" style="width:100%; margin-right:10px;"></div>
+                                            <% 
+                                                var pcNaver = [];
+                                                var mobileNaver = [];
+                                                var relatedKeys = Object.keys(dataSet.naver.related);
+                                                var buffer = [];
+
+                                                for(var i = 0; i<10; i++)
+                                                {
+                                                    //console.log(dataSet.naver.related[relatedKeys[i]]);
+                                                    var relatedCount = dataSet.naver.related[relatedKeys[i]];           
+                                                    pcNaver[i] = relatedCount[0];
+                                                    mobileNaver[i] = relatedCount[1];
+                                                }
+                                            %>
+                                            <%
+                                                relatedKeys.forEach(function (item, index, array) {
+                                                    array[index] = "\'"+ item + "\'"; // 정말 정말 중요! '를 붙여줌 흑흑,,
+                                                });
+                                            %>
+                                            <script>
+                                            naver_id = document.getElementById('naverKeyword');
+                                            var Mobile = {
+                                              x: [<%- relatedKeys %>], //keyword set
+                                              y: [<%= mobileNaver %>],
+                                              name: 'Mobile 월간 검색수',
+                                              type: 'bar',
+                                            marker: {
+                                                    color: '#99ccff',
+                                                  }
+                                            };
+
+                                            var PC = {
+                                              x: [<%- relatedKeys %>], //keyword set
+                                              y: [<%= pcNaver %>],
+                                              name: 'PC 월간 검색수',
+                                              type: 'bar',
+                                                marker: {
+                                                    color: '#ff9999',
+                                                  }
+                                            };
+                                            var data = [PC, Mobile];
+                                            var layout = {barmode: 'group'};
+                                            var layout2 = {barmode: 'stack'};
+                                            Plotly.newPlot(naver_id, data, layout2);
+                                            </script> 
                                         </p>
                                     </div>
                                 </div>
                             </div>
                         
-                            <div id="tab2" class="tab-pane" role="tabpanel">
+                            <div id="tab2" class="tab-pane in active" role="tabpanel">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <p class="mbr-text pt-4 mbr-fonts-style display-7">
-                                             <table border="2" class="table RelatedTable" style="float:right; margin-left:10px;">
-                                                <thead>
-                                                    <tr class="table-heads">
-                                                        <th class="head-item1 mbr-fonts-style display-7">
-                                                            순위</th>
-                                                        <th class="head-item mbr-fonts-style display-7">
-                                                            검색어</th>
-                                                    </tr>
-                                                <tbody>
-                                                    <% 
-                                                        // console.log(dataSet.daum.related);
-                                                        for (var i =0; i<dataSet.daum.related.length; i++){
-                                                        var related = dataSet.daum.related[i];
-                                                    %>
-                                                    <tr class="table-heads">
-                                                        <td class="body-item1 mbr-fonts-style display-7">
-                                                            <%=i+1 %>
-                                                        </td>
-                                                        <td class="body-item mbr-fonts-style display-7">
-                                                            <%=related %>
-                                                        </td>
-                                                    </tr>
-                                                    <% } %>
-                                                </tbody>
-                                            </table>
-                                        
+                                    
                                         </p>
                                     </div>
                                 </div>
                             </div>
-                            
-                      <div id="tab3" class="tab-pane" role="tabpanel">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <p class="mbr-text pt-4 mbr-fonts-style display-7">
-                                            <table border="2" class="table RelatedTable" style="float:right; margin-left:10px;">
-                                                <thead>
-                                                    <tr class="table-heads">
-                                                        <th class="head-item1 mbr-fonts-style display-7">
-                                                            순위</th>
-                                                        <th class="head-item mbr-fonts-style display-7">
-                                                            검색어</th>
-                                                        <th class="head-item mbr-fonts-style display-7">
-                                                            PC 검색량</th>
-                                                        <th class="head-item mbr-fonts-style display-7">
-                                                            모바일 검색량</th>
-                                                    </tr>
-                                                <tbody>
-                                                    <% 
-                                                        var pcNaver = [];
-                                                        var mobileNaver = [];
-                                                        relatedKeys = Object.keys(dataSet.naver.related);
-                                                        for(var i = 0; i<10; i++)
-                                                        {
-                                                            //console.log(dataSet.naver.related[relatedKeys[i]]);
-                                                            var relatedCount = dataSet.naver.related[relatedKeys[i]];           
-                                                            pcNaver[i] = relatedCount[0];
-                                                            mobileNaver[i] = relatedCount[1];
-                                                        
-                                                    %>
-                                                    <tr class="table-heads">
-                                                        <td class="body-item1 mbr-fonts-style display-7">
-                                                            <%=i+1 %>
-                                                        </td>
-                                                        <td class="body-item mbr-fonts-style display-7">
-                                                            <%=relatedKeys[i] %>
-                                                        </td>
-                                                        <td class="body-item mbr-fonts-style display-7">
-                                                            <%=pcNaver[i] %>
-                                                        </td>
-                                                        <td class="body-item mbr-fonts-style display-7">
-                                                            <%=mobileNaver[i] %>
-                                                        </td>
-                                                    </tr>
-                                                    <% } %>
-                                                </tbody>
-                                            </table>
+
         </section>
     </section>
     <!-- 하단 메뉴 바
@@ -657,7 +588,7 @@
 </body>
 
 </html>
-                    <script>
+<script>
         
 
 //맨위 검색창 탭 선택
@@ -673,7 +604,7 @@ $(document).ready(function() {
         $("#" + tab_id).addClass('current');
     })
     
-    document.body.style.zoom ="0.8";
+    // document.body.style.zoom ="0.8";
     
     // 선언한 TextBox에 DateTimePicker 위젯을 적용한다.
     $('#startDate').datetimepicker({

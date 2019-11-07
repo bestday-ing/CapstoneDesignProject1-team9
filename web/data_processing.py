@@ -19,17 +19,26 @@ def search_naver(searchword, StartDate, EndDate):
     FullDatalist = naverAPI_section_search(StartDate, FindRecentMonth(), Keyword, DeviceType)
     # 실제 최근 1달 검색량은 나중에 구하는 것으로 (현재는 데이터가 없어서 1000으로 둠)
 
-    rk, pb = get_abs_value_and_related_keywords_naver(Keyword) # 둘 다 dictionary
+    rk, pb = get_abs_value_and_related_keywords_naver(Keyword)  # 둘 다 dictionary
 
-    ''' pre processing ''' # 숫자 ',' 있는 거 parsing
+    ''' pre processing '''  # 숫자 ',' 있는 거 parsing
     for k in rk.keys():
         for i in range(0, 2):
             buff = rk[k][i].split(",")
             number = ''
             for num in buff:
                 number += num
-            rk[k][i] = number
-            # 여기서 바로 하고 싶지만 10 '미만'인 경우는 어떻게 처리하는 게 좋을까? 아니면 에러 발생
+            try:
+                rk[k][i] = int(number)
+            except:
+                number = ''
+                filter = rk[k][i].split(" ")
+                for num in filter:
+                    if(num == "미만"): # 10 '미만'인 경우 처리
+                        num = "/2"
+                    number += num
+                rk[k][i] = eval(number)
+        rk[k].append(rk[k][0]+rk[k][1])
 
     # 상대 비율을 통한 절대값 계산을 모듈화하면 좋을 듯 구글도 쓰고~ 네이버도 쓰고~
     RecentRealCount = int(rk[Keyword][0]) + int(rk[Keyword][1])
@@ -60,12 +69,18 @@ def search_naver(searchword, StartDate, EndDate):
         'count' : count
     }
     '''
-    naver = {
-        'graphData' : FinalDatalist,
-        'related' : rk
-    }
-    return naver # dictionay 던짐
+    ''' sorting '''
+    sorted_rk = sorted(rk.items(), key=lambda x: x[1][2], reverse=True)
+    newrk = {}
+    for keyword in sorted_rk:
+        newrk[keyword[0]] = [keyword[1][0], keyword[1][1]]
+    # print(newrk)
 
+    naver = {
+        'graphData': FinalDatalist,
+        'related': newrk
+    }
+    return naver  # dictionay 던짐
 
 def search_google(searchword):  # 네이버 검색
 

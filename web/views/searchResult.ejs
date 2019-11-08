@@ -68,7 +68,7 @@
             /* width: 100%; */
             position: fixed;
             left: 9%;
-            top: 100px;
+            top: 9%;
             z-index: 3;
         }
 
@@ -320,6 +320,7 @@
             <ul class="tabs">
                 <li id="gSearch" class="tab-link current" data-tab="tab-1">일반 검색</li>
                 <li id="dSerach" class="tab-link" data-tab="tab-2">검색 필터</li>
+                <li id="cSerach" class="tab-link" data-tab="tab-3">+ 비교</li>
             </ul>
             <!--TAB1-->
             <div id="tab-1" class="tab-content2 current">
@@ -329,7 +330,7 @@
                         <script>
                             document.getElementById("keyword").value = "<%= keyword %>";
                             sessionStorage.setItem( "current", "<%= keyword %>" );
-                            sessionStorage.setItem("<%= keyword %>", '<%- dataSet.JSONString %>'); 
+                            sessionStorage.setItem("<%= keyword %>", '<%- dataSet.JSONString %>');
                             // JsonQueryResult = JSON.parse(sessionStorage.getItem("<%= keyword %>"));
                             // console.log(JsonQueryResult.naver.graphData.period); test 완료 
                         </script>
@@ -359,6 +360,19 @@
                 <!-- 여기 아래로 nav bar 하단에 들어갈 연관 검색어 들어감 -->
                 <!-- 연관검색어는 탭에 상관없이 들어감 -->
             </div>
+            
+            <!--TAB3-->
+            <div id="tab-3" class="tab-content2">
+            <form id='compare_form' method='get' action='/compareKeywords' class="collapse navbar-collapse">
+                    <!--<input type="hidden" name="keyword" value="<%= keyword%>">-->
+                    <input id="compareKeyword" type="text" name="compare" placeholder="+ 비교" class="form-control display-7" value="" id="keyword-formbuilder-3">
+                <div class="icons-menu">
+                <a href="javascript:{}" onclick="document.getElementById('compare_form').submit();">
+                    <span class="p-2 mbr-iconfont mobi-mbri-search mobi-mbri" style="color: rgb(87, 70, 139); fill: rgb(87, 70, 139);"></span>
+                </a>
+                </div>
+            </form>
+            </div>
         </nav>
     </section>
 
@@ -372,7 +386,7 @@
                 </a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="searchResult.html">
+                <a class="nav-link" href="/loadComparePage">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>검색어 비교</span>
                 </a>
@@ -414,7 +428,7 @@
                             <br><br>
                             <h2 class="mbr-section-title mbr-fonts-style display-2">Summary Chart</h2>
                             <div id="box">
-                                <div id="tester" style="width:100%;"></div>
+                                <div id="summary" style="width:100%;"></div>
                                 <script>
                                 var array = [];
                                 <%
@@ -467,8 +481,8 @@
                                 };
                                 
                                 var summary_data = [naver, google];
-                                TESTER = document.getElementById('tester');
-                                Plotly.newPlot(TESTER, summary_data);
+                                //TESTER = document.getElementById('tester');
+                                Plotly.newPlot(summary, summary_data);
                                 </script>
                             </div>
                         </div>
@@ -492,13 +506,30 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <p class="mbr-text pt-4 mbr-fonts-style display-7">
-                                            <div id="naver" style="width:100%; margin-right:10px;"></div>
+                                        <div>
+                                            <div id="naver_trend" style="width:70%; margin-right:10px;"></div>
                                             <script>
-                                            naver_id = document.getElementById('naver');
-                                            Plotly.newPlot(naver_id, [naver]);
+                                            naver_trend = document.getElementById('naver_trend');
+                                            Plotly.newPlot(naver_trend, [naver]);
                                             </script>
+                                        
+                                            <div id="naver_specific" style="width:30%;"></div>
+                                            <script>
+                                            naver_specific = document.getElementById('naver_specific');
+                                            var data = [{
+                                              values: [<%= dataSet.naver.searchword[0] %>, <%= dataSet.naver.searchword[1] %>],
+                                              labels: ['PC', 'mobile'],
+                                              type: 'pie'
+                                            }];
+                                            var layout = {
+                                              title: '<%= keyword %> 의 월간 검색 수'
+                                            };
+                                            Plotly.newPlot('naver_specific', data, layout, {showSendToCloud:true});
+                                            </script>
+                                        </div>
+                                        
                                             <input id='graphChange' type="button" value="펼쳐서 보기">
-                                            <div id="naverKeyword" style="width:100%; margin-right:10px;"></div>
+                                            <div id="naverKeyword" style="width:100%;"></div>
                                             <% 
                                                 var pcNaver = [];
                                                 var mobileNaver = [];

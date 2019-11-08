@@ -41,7 +41,8 @@ def search_naver(searchword, StartDate, EndDate):
         rk[k].append(rk[k][0]+rk[k][1])
 
     # 상대 비율을 통한 절대값 계산을 모듈화하면 좋을 듯 구글도 쓰고~ 네이버도 쓰고~
-    RecentRealCount = int(rk[Keyword][0]) + int(rk[Keyword][1])
+    first = list(rk.keys())[0]
+    RecentRealCount = int(rk[first][0]) + int(rk[first][1])
     FullDatalist.reverse()
     RealCountRatio = FullDatalist[0][1]
     FullDatalist.reverse()
@@ -70,6 +71,8 @@ def search_naver(searchword, StartDate, EndDate):
     }
     '''
     ''' sorting '''
+    searchword_specific = rk[first]
+    del rk[first]
     sorted_rk = sorted(rk.items(), key=lambda x: x[1][2], reverse=True)
     newrk = {}
     for keyword in sorted_rk:
@@ -78,6 +81,7 @@ def search_naver(searchword, StartDate, EndDate):
 
     naver = {
         'graphData': FinalDatalist,
+        'searchword': searchword_specific,
         'related': newrk
     }
     return naver  # dictionay 던짐
@@ -118,7 +122,7 @@ if __name__ == '__main__':
             # startDate = "2016-01-01"
             startDate = oneYearsAgo()
     except:
-        startDate = "2016-01-01"
+        startDate =  oneYearsAgo()
 
     try:
         endDate = sys.argv[3]

@@ -14,6 +14,7 @@ module.exports = {
 	route_info: [
 	    //===== User =====//
 	    {file:'./user', path:'/', method:'loadFirstPage', type:'get'}, //user.loadFirstPage
-        {file:'./user', path:'/showResults', method:'showResults', type:'get'} //user.showResults
+        {file:'./user', path:'/showResults', method:'showResults', type:'get'}, //user.showResults
+        {file:'./user', path:'/compareKeywords', method:'compareKeywords', type:'get'} //user.compareKeywords
 	]
 }

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <link rel="shortcut icon" href="../public/assets/images/logo2.png" type="image/x-icon">
+    <meta name="description" content="">
+    <title>Master Search</title>
+    <link rel="stylesheet" href="../public/assets/web/assets/mobirise-icons/mobirise-icons.css">
+    <link rel="stylesheet" href="../public/assets/web/assets/mobirise-icons2/mobirise2.css">
+    <link rel="stylesheet" href="../public/assets/tether/tether.min.css">
+    <link rel="stylesheet" href="../public/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../public/assets/bootstrap/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="../public/assets/bootstrap/css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="../public/assets/dropdown/css/style.css">
+    <link rel="stylesheet" href="../public/assets/formstyler/jquery.formstyler.css">
+    <link rel="stylesheet" href="../public/assets/formstyler/jquery.formstyler.theme.css">
+    <link rel="stylesheet" href="../public/assets/datepicker/jquery.datetimepicker.min.css">
+    <link rel="stylesheet" href="../public/assets/theme/css/style.css">
+    <link rel="stylesheet" href="../public/assets/formoid-css/recaptcha.css">
+    <link rel="preload" as="style" href="../public/assets/mobirise/css/mbr-additional.css">
+    <link rel="stylesheet" href="../public/assets/mobirise/css/mbr-additional.css" type="text/css">
+    <!-- plot 그리는 library -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/v8/js/anychart-tag-cloud.min.js"></script>
+     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/css/bootstrap-datetimepicker.min.css"
+        rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.2/moment-with-locales.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/js/bootstrap-datetimepicker.min.js"></script>
+
+    <style>
+
+        /* 연관검색어 목록 css */
+        @import url(https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css);
+
+        .normal {
+            font-weight: 400
+        }
+
+        .bold {
+            font-weight: 700
+        }
+
+        .bolder {
+            font-weight: 800
+        }
+
+        .light {
+            font-weight: 300
+        }
+
+        html,
+        body {
+            font-family: 'NanumSquare', sans-serif;
+            z-index: 1;
+            /* position:relative; */
+        }
+
+        #wrap {
+            margin: 0px;
+            padding: 0px;
+            /* width: 100%; */
+            position: fixed;
+            left: 9%;
+            top: 9%;
+            z-index: 3;
+        }
+
+
+        a,
+        img {
+            border: 0px;
+            text-decoration: none;
+        }
+
+        ul,
+        li {
+            list-style: none;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        h1 {
+            color: #525252;
+            font-size: 40px;
+            font-weight: 100;
+            text-align: center;
+            margin: 0px;
+            margin-top: 193px;
+        }
+
+        h1>b {
+            font-weight: 900;
+        }
+
+        #best_search {
+
+            margin: 0 auto;
+    padding-top: 50px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+        }
+
+        #best_search li,
+        dd {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        button {
+            width: 121px;
+            background-color: #0085e2;
+            color: #fff;
+            border: 0px;
+            height: 63px;
+            margin-left: -5px;
+            padding: 0px;
+            font-size: 18px;
+        }
+
+        #best_search li p {
+            color: #393939;
+            font-size: 17px;
+            font-weight: bold;
+            margin: 0px;
+            padding-right: 30px;
+        }
+
+        dd,dt {
+            margin: 0px;
+        }
+
+        dd a.t,dt a.t {
+            cursor: pointer;
+            margin: 0px;
+            color: #4b4b4b;
+            text-overflow: ellipsis;
+            /* overflow: hidden; */
+            width: 94px;
+            white-space: nowrap;
+            display: inline-block;
+            font-size: 17px;
+            text-align: left;
+            padding-right: 13px;
+            font-weight: 700;
+            vertical-align: middle;
+        }
+
+        dd .num,dt .num {
+            background-color: #4b4b4b;
+            color: #fff;
+            font-size: 10px;
+            margin-right: 10px;
+            vertical-align: middle;
+            width: 18px;
+            height: 18px;
+            float: left;
+            line-height: 18px;
+            text-align: center;
+        }
+
+        .best_add {
+            border: 1px solid #bebebe;
+            color: #4b4b4b;
+            padding: 0px 4px;
+            margin-left: 10px;
+        }
+
+        /* 연관검색어 목록 css */
+        body {
+            display: flex;
+        }
+
+        .Navigator1 {
+            width: 500px;
+            margin: 0 auto;
+        }
+
+        ul.tabs {
+            margin: 0px;
+            padding: 0px;
+            list-style: none;
+        }
+
+        ul.tabs li {
+            background: none;
+            color: #222;
+            display: inline-block;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+
+        ul.tabs li.current {
+            background-color: antiquewhite;
+            color: #222;
+        }
+
+        .tab-content2 {
+            display: none;
+            padding: 15px;
+        }
+
+        .tab-content2.current {
+            display: inherit;
+            flex: 7;
+        }
+
+        .results {
+            width: 100%;
+            padding: 12px;
+            color: black;
+        }
+
+        .RelatedTable {
+            /* font-weight: bold; */
+            width: 30%;
+            height: 200px;
+            text-align: center;
+            
+        }
+
+        #navbar {
+            display: flex;
+            background-color: powderblue;
+            min-height: auto;
+            left : 200px;
+
+        }
+
+        #rightsection {
+            display: inline-flex;
+            flex-direction: column;
+            flex: 10;
+            z-index: 1;
+
+        }
+
+        #menubarsection {
+            flex: 1;
+            text-decoration-color: powderblue;
+        }
+
+        #graphsection1 {
+            flex: 2;
+        }
+
+        #graphsection1 {
+            flex: 1;
+        }
+    </style>
+</head>
+
+<body>
+    
+
+    <!-- 그래프및 메인 화면 -->
+    <!-- 중앙 큰 섹션 -->
+    <section id="rightsection">
+        <section class="accordion1 cid-rx3JXkfsaj" id="accordion01-a2" data-sortbtn="btn-primary">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-12">
+                        <div class="section-head text-center space30">
+                            <br><br>
+                            <h2 class="mbr-section-title mbr-fonts-style display-2">Summary Chart</h2>
+                            <div id="box">
+                                <div id="summary" style="width:100%;"></div>
+                                <script>                              
+                                var garray = [];
+                                <%
+                                    garray = dataSet['period'];
+                                    garray.forEach(function (item, index, array) {
+                                        garray[index] = "\'"+ item + "\'"; // 정말 정말 중요! '를 붙여줌 흑흑,,
+                                    });
+                                %>
+                                    
+
+                                    
+                                var google = {
+                                    x: [<%- garray  %>], // 기간
+                                    y: [<%= dataSet['count'] %>], // 검색량
+                                    mode: 'lines+markers',
+                                    type: 'scatter',
+                                    name: 'google',
+                                    line: {color: '#4285F4'}
+                                };
+                                
+                                var summary_data = [google];
+                                //TESTER = document.getElementById('tester');
+                                Plotly.newPlot(summary, summary_data);
+                                </script>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    <!-- 하단 메뉴 바
+    <section once="" class="cid-rEoHegd1JZ" id="footer01-0" data-sortbtn="btn-primary">
+        <div class="container">
+            <div class="media-container-row align-center mbr-white">
+                <div class="col-12">
+                    <p class="mbr-text mb-0 mbr-fonts-style display-4">
+                        © Copyright 2019 Mobirise - All Rights Reserved
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section> -->
+    <script src="../public/assets/web/assets/jquery/jquery.min.js"></script>
+    <script src="../public/assets/popper/popper.min.js"></script>
+    <script src="../public/assets/tether/tether.min.js"></script>
+    <script src="../public/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../public/assets/dropdown/js/nav-dropdown.js"></script>
+    <script src="../public/assets/dropdown/js/navbar-dropdown.js"></script>
+    <script src="../public/assets/touchswipe/jquery.touch-swipe.min.js"></script>
+    <script src="../public/assets/mbr-tabs/mbr-tabs.js"></script>
+    <script src="../public/assets/mbr-switch-arrow/mbr-switch-arrow.js"></script>
+    <script src="../public/assets/formstyler/jquery.formstyler.js"></script>
+    <script src="../public/assets/formstyler/jquery.formstyler.min.js"></script>
+    <script src="../public/assets/datepicker/jquery.datetimepicker.full.js"></script>
+    <script src="../public/assets/smoothscroll/smooth-scroll.js"></script>
+    <script src="../public/assets/theme/js/script.js"></script>
+    <script src="../public/assets/formoid/formoid.min.js"></script>
+</body>
+
+</html>
+<script>
+        
+
+//맨위 검색창 탭 선택
+$(document).ready(function() {
+
+    $('ul.tabs li').click(function() { // tab 항목 선택시
+        var tab_id = $(this).attr('data-tab');
+
+        $('ul.tabs li').removeClass('current'); //원래 선택된 항목지우고
+        $('.tab-content2').removeClass('current');
+
+        $(this).addClass('current'); //현재 선택된 것 추가
+        $("#" + tab_id).addClass('current');
+    })
+    
+    // document.body.style.zoom ="0.8";
+    
+    // 선언한 TextBox에 DateTimePicker 위젯을 적용한다.
+    $('#startDate').datetimepicker({
+        language: 'ko', // 화면에 출력될 언어를 한국어로 설정한다.
+        pickTime: false, // 사용자로부터 시간 선택을 허용하려면 true를 설정하거나 pickTime 옵션을 생략한다.
+        defaultDate: new Date(), // 기본값으로 오늘 날짜를 입력한다. 기본값을 해제하려면 defaultDate 옵션을 생략한다.
+        minView: 2,
+        format: 'Y-m-d'
+    });
+
+    $('#endDate').datetimepicker({
+        language: 'ko',
+        pickTime: false,
+        defaultDate: new Date(),
+        minView: 2,
+        format: 'Y-m-d'
+    });
+
+})
+    
+    
+
+    function view(arg) {
+        $(".time1, .time2, .ad1, .ad2").css("display", "none");
+        // $(".time1, .time2, .time3, .time4, .ad1, .ad2, .ad3, .ad4").css("display", "none");
+        if (arg == "0") {
+            $(".time2, .ad2").css("display", "block");
+            viewcount = 1;
+        }
+        else if (arg == "1") {
+            $(".time1, .ad1").css("display", "block");
+            viewcount = 0;
+        }
+    }
+var viewcount = 0;
+var rtcarousel = setInterval(function() { view(viewcount) }, 3000);
+
+$("#best_search").mouseenter(function() {
+    clearInterval(rtcarousel);
+});
+
+$("#best_search").mouseleave(function() {
+    rtcarousel = setInterval(function() { view(viewcount) }, 3000);
+});
+</script>
+
+        
+<script type="text/javascript">
+  $(document).ready(function(){
+      
+      $(document).on("click","#graphChange",function(event){ //graph 바뀜
+        var layout2 = {barmode: 'group'};  
+        if(layout.barmode == layout2.barmode)
+            layout = {barmode: 'stack'}; 
+        else
+            layout = layout2;   
+        Plotly.newPlot(naver_id, M_PC_data, layout);
+      });
+  });// end of ready()
+
+</script>
+

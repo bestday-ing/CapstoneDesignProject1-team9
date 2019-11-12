@@ -401,17 +401,100 @@
                     <div class="col-12 col-md-12">
                         <div class="text-center">
                             <!-- active buttons -->
-                                <div class="btn-group btn-group-toggle" data-toggle="buttons" >
-                                        <label class="btn btn-secondary active"  >
-                                          <input type="radio" name="options" id="option1" autocomplete="off" checked > Graph1
-                                        </label>
-                                        <label class="btn btn-secondary">
-                                          <input type="radio" name="options" id="option2" autocomplete="off"> Graph2
-                                        </label>
-                                        <label class="btn btn-secondary">
-                                          <input type="radio" name="options" id="option3" autocomplete="off"> Graph3
-                                        </label>
-                                      </div>
+                           <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-secondary active" id="option1">
+                                        <input type="radio" name="options" id="option1" autocomplete="off" checked> Graph1
+                                    </label>
+                                    <label class="btn btn-secondary" id="option2">
+                                        <input type="radio" name="options" id="option2" autocomplete="off"> Graph2
+                                    </label>
+                                    <label class="btn btn-secondary" id="option3">
+                                        <input type="radio" name="options" id="option3" autocomplete="off"> Graph3
+                                    </label>
+                                </div>
+                                <script>
+                                option1 = document.getElementById('option1'); // 처음 화면 : 평균 + 트렌드
+                                option2 = document.getElementById('option2'); // 상관 관계 보여주는 그래프
+                                option3 = document.getElementById('option3'); // 연관 검색어간의 중복 되는 부분 보여주는 그래프
+
+                                option1.addEventListener("click", displayTrend, true);
+                                option2.addEventListener("click", displayCov, true);
+                                option3.addEventListener("click", displayRelated, true);
+
+                                function displayTrend() {
+                                    alert('option1 clicked');
+                                    document.getElementById('box').innerHTML = '<div id="avg_compare" style="width:30%; float:left;"></div><div id="trend_compare" style="width:70%; float:right;"></div>';
+                                    Plotly.newPlot('trend_compare', naver_data);
+                                    Plotly.newPlot('avg_compare', data, layout);
+                                };
+
+
+                                function displayCov() {
+                                    alert('option2 clicked');
+                                    document.getElementById('box').innerHTML = '<div id="cov_xy" style="width:50%; float:left;"></div><div id="cov_yx" style="width:50%; float:right;"></div>';
+                                    //X 축에 대한 Y축
+                                    var k_Count = Session_dataSet.naver.graphData.count;
+                                    var c_Count = [<%= dataSet.naver.graphData.count %>];
+                                    var xy = {
+                                        x: k_Count,
+                                        y: c_Count,
+                                      mode: 'markers',
+                                      type: 'scatter',
+                                      name: 'Team B',
+                                      marker: { size: 10 }
+                                    };
+                                    
+                                    var yx = {
+                                        y: k_Count,
+                                        x: c_Count,
+                                      mode: 'markers',
+                                      type: 'scatter',
+                                      name: 'Team B',
+                                      marker: { size: 10 }
+                                    };
+
+
+                                    var layout_xy = { 
+                                      title: keyword + ' 검색량에 대한 <%= keyword %> 검색량 상관 관계',
+                                      hovermode:'closest',
+                                      dragmode:'select',
+                                      plot_bgcolor:'rgba(240,240,240, 0.95)',
+                                    };
+                                    
+                                    var layout_yx = { 
+                                      title: '<%= keyword %> 검색량 에 대한 ' + keyword +' 검색량 상관 관계',
+                                      hovermode:'closest',
+                                      dragmode:'select',
+                                      plot_bgcolor:'rgba(240,240,240, 0.95)',
+                                    };
+                                    
+                                    Plotly.newPlot('cov_xy', [xy], layout_xy);
+                                    Plotly.newPlot('cov_yx', [yx], layout_yx);
+                                };
+
+                                function displayRelated() {
+                                    alert('option3 clicked');
+                                    document.getElementById('box').innerHTML = '<div id="tester1" style="width:100%;"></div><div id="tester2" style="width:100%;"></div>';
+                                    TESTER = document.getElementById('tester1');
+                                    Plotly.plot(TESTER, [{
+                                        x: [1, 2, 3, 4, 5],
+                                        y: [1, 2, 4, 8, 16]
+                                    }], {
+                                        margin: { t: 0 }
+                                    });
+
+                                    TESTER = document.getElementById('tester2');
+                                    Plotly.plot(TESTER, [{
+                                        x: [1, 2, 3, 4, 5],
+                                        y: [1, 2, 4, 8, 16]
+                                    }], {
+                                        layout: {
+                                            showlegend: false
+                                        }
+                                    });
+                                };
+                                </script>
+                            
                             <div id="box">
                                 <div id="tester2" style="width:30%; float:left;"></div>
                                 <div id="tester" style="width:70%; float:right;"></div>

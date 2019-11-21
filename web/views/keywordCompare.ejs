@@ -236,7 +236,7 @@
             display: flex;
             background-color: powderblue;
             min-height: auto;
-            left: 200px;
+            /* left: 200px; */
 
         }
 
@@ -343,7 +343,7 @@
     </section>
     <!-- 좌측 툴바 + 중앙화면 컨테이너 -->
 <div class ="LCContainer">
-    <!-- 좌측 툴바 -->
+    <!-- 좌측 툴바 
     <section class="menu cid-rx3IEQFgmC" once="menu" id="menubarsection" data-sortbtn="btn-primary"
         style="background-color: #212529; ">
         <ul class="sidebar navbar-nav">
@@ -360,7 +360,7 @@
                 </a>
             </li>
         </ul>
-    </section>
+    </section> -->
     <!-- 중앙화면 -->
     <section id="rightsection">
 
@@ -403,13 +403,13 @@
                             <!-- active buttons -->
                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                     <label class="btn btn-secondary active" id="option1">
-                                        <input type="radio" name="options" id="option1" autocomplete="off" checked> Graph1
+                                        <input type="radio" name="options" id="option1" autocomplete="off" checked> 트렌드
                                     </label>
                                     <label class="btn btn-secondary" id="option2">
-                                        <input type="radio" name="options" id="option2" autocomplete="off"> Graph2
+                                        <input type="radio" name="options" id="option2" autocomplete="off"> 검색어 간 관계
                                     </label>
                                     <label class="btn btn-secondary" id="option3">
-                                        <input type="radio" name="options" id="option3" autocomplete="off"> Graph3
+                                        <input type="radio" name="options" id="option3" autocomplete="off"> 검색량 분포
                                     </label>
                                 </div>
                                 <script>
@@ -419,10 +419,10 @@
 
                                 option1.addEventListener("click", displayTrend, true);
                                 option2.addEventListener("click", displayCov, true);
-                                option3.addEventListener("click", displayRelated, true);
+                                option3.addEventListener("click", displayViolin, true);
 
                                 function displayTrend() {
-                                    alert('option1 clicked');
+                                    // alert('option1 clicked');
                                     document.getElementById('box').innerHTML = '<div id="avg_compare" style="width:30%; float:left;"></div><div id="trend_compare" style="width:70%; float:right;"></div>';
                                     Plotly.newPlot('trend_compare', naver_data);
                                     Plotly.newPlot('avg_compare', data, layout);
@@ -430,7 +430,7 @@
 
 
                                 function displayCov() {
-                                    alert('option2 clicked');
+                                    // alert('option2 clicked');
                                     document.getElementById('box').innerHTML = '<div id="cov_xy" style="width:50%; float:left;"></div><div id="cov_yx" style="width:50%; float:right;"></div>';
                                     //X 축에 대한 Y축
                                     var k_Count = Session_dataSet.naver.graphData.count;
@@ -455,14 +455,14 @@
 
 
                                     var layout_xy = { 
-                                      title: keyword + ' 검색량에 대한 <%= keyword %> 검색량 상관 관계',
+                                      title: keyword + ' - <%= keyword %> ',
                                       hovermode:'closest',
                                       dragmode:'select',
                                       plot_bgcolor:'rgba(240,240,240, 0.95)',
                                     };
                                     
                                     var layout_yx = { 
-                                      title: '<%= keyword %> 검색량 에 대한 ' + keyword +' 검색량 상관 관계',
+                                      title: '<%= keyword %> - ' + keyword,
                                       hovermode:'closest',
                                       dragmode:'select',
                                       plot_bgcolor:'rgba(240,240,240, 0.95)',
@@ -470,28 +470,58 @@
                                     
                                     Plotly.newPlot('cov_xy', [xy], layout_xy);
                                     Plotly.newPlot('cov_yx', [yx], layout_yx);
+                                    //install pandas-js and babel-runtime --save
+
                                 };
 
-                                function displayRelated() {
-                                    alert('option3 clicked');
+                                function displayViolin() {
+                                    // alert('option3 clicked');
                                     document.getElementById('box').innerHTML = '<div id="tester1" style="width:100%;"></div><div id="tester2" style="width:100%;"></div>';
-                                    TESTER = document.getElementById('tester1');
-                                    Plotly.plot(TESTER, [{
-                                        x: [1, 2, 3, 4, 5],
-                                        y: [1, 2, 4, 8, 16]
-                                    }], {
-                                        margin: { t: 0 }
-                                    });
+                                    var k_Count = Session_dataSet.naver.graphData.count;
+                                    var c_Count = [<%= dataSet.naver.graphData.count %>];
 
-                                    TESTER = document.getElementById('tester2');
-                                    Plotly.plot(TESTER, [{
-                                        x: [1, 2, 3, 4, 5],
-                                        y: [1, 2, 4, 8, 16]
-                                    }], {
-                                        layout: {
-                                            showlegend: false
-                                        }
-                                    });
+
+                               function violin(x, y0, name, fillcolor, width, side, pointpos) {
+                                return {
+                                    type: 'violin',
+                                    width: width,
+                                    x: x,
+                                    points: 'all',
+                                    jitter: 0.6,
+                                    pointpos: pointpos,
+                                    side: side,
+                                    name: name,
+                                    box: {
+                                      visible: false,
+                                    },
+                                    boxpoints: false,
+                                    line: {
+                                      color: 'black',
+                                    },
+                                    fillcolor: fillcolor,
+                                    opacity: 0.6,
+                                    meanline: {
+                                      visible: true,
+                                      color: 'blue',
+                                    },
+                                    y0: y0
+                                };
+                            }
+
+                            var data = [
+                              violin(k_Count, 0.0, keyword, 'rgba(222,45,38,0.8)', 0, 'both', 1.9),
+                              violin(c_Count, 0.0, "<%= keyword %>", 'rgba(204,204,204,1)', 0, 'both', 1),
+                            ];
+
+                            var layout = {
+                              //title: "Joyplot - Violin with multiple widths",
+                              xaxis: {
+                                zeroline: false
+                              },
+                              violingap: 0
+                            };
+
+                            Plotly.newPlot('tester1', data, layout);
                                 };
                                 </script>
                             
@@ -533,12 +563,12 @@
                                 var naver_data = [k_naver, c_naver];
                                 TESTER = document.getElementById('tester');
                                 Plotly.newPlot(TESTER, naver_data);
-<%                              
+                            <%                              
                                 var naver_Ccount = [];
                                 naver_Ccount = dataSet.naver.graphData.count;
                                 c_sum = naver_Ccount.reduce(function(a, b) { return a + b; });
                                 c_avg = c_sum / naver_Ccount.length;
-%>
+                            %>
 
                                 var xValue = [ keyword, '<%= keyword %>'];
 

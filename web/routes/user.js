@@ -28,8 +28,58 @@ var compareKeywords = function(req, res) {
 
 };
 
-function data_Processing(args, ejsFileName, req, res) {
-    var answerPermissions = new AnswerPermissions(args[0], "2016-01-01", "2018-12-31");  //날짜 나중에 undefined 처리해서 여기만 바꿔주면 되겠다. 시작 날짜와 종료 날짜는 args[1] args[2] 에 들어 있음. 
+
+
+function FindRecentMonth() {
+    var lastDay = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    var date = new Date();
+    var str;
+
+    var trailMonth = (date.getMonth() + 11) % 12;
+    var year = date.getFullYear();
+
+    if (trailMonth == 11)
+        year--;
+
+    if (year % 400 == 0 || ( year % 4 == 0 && year % 100 != 0))
+            lastDay[1]++;
+
+    str = year + "-" + (trailMonth + 1) + "-" + lastDay[trailMonth];
+
+    return str;
+}
+
+function oneYearsAgo() {
+    var date = new Date();
+    var str;
+
+    date.setFullYear(date.getFullYear() - 1);
+
+    str = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+
+    return str 
+}
+
+
+
+function check_params (params)
+{
+    if(params[1] == undefined ) //startDate
+    {
+        params[1] = oneYearsAgo();      
+    }
+    
+    if(params[2] == undefined ) //endDate
+    {
+        params[2] = FindRecentMonth();      
+    }
+    
+    return params;
+}
+
+function data_Processing(params, ejsFileName, req, res) {
+    var args = check_params(params);
+    var answerPermissions = new AnswerPermissions(args[0], args[1], args[2]);   
     
     /* 병렬 처리 */
     async.parallel([

@@ -32,7 +32,7 @@ function data_Processing(args, ejsFileName, req, res) {
     var answerPermissions = new AnswerPermissions(args[0], "2016-01-01", "2018-12-31");  //날짜 나중에 undefined 처리해서 여기만 바꿔주면 되겠다. 시작 날짜와 종료 날짜는 args[1] args[2] 에 들어 있음. 
     
     /* 병렬 처리 */
-    async.series([
+    async.parallel([
         answerPermissions.get_gTrend_graphData, /* 병렬로 실행 시킬 함수 리스트, 현재 3개 */
         answerPermissions.get_gTrend_related_Data,
         answerPermissions.get_nTrend_crawling_Data

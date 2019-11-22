@@ -26,16 +26,11 @@
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
     <script src="https://cdn.anychart.com/releases/v8/js/anychart-tag-cloud.min.js"></script>
-     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <link
-        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/css/bootstrap-datetimepicker.min.css"
-        rel="stylesheet" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.2/moment-with-locales.min.js"></script>
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/js/bootstrap-datetimepicker.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/3.0.0/js/bootstrap-datetimepicker.min.js"></script>
     <style>
-
         /* 연관검색어 목록 css */
         @import url(https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css);
 
@@ -260,47 +255,56 @@
 
 <body>
     <!-- 연관 검색어 팝업창 -->
-        <div id="wrap">
+    <div id="wrap">
         <div class="container">
             <ul id="best_search">
                 <li>
                     <p>연관검색어</p>
                 </li>
                 <li>
-                    <li>
+                <li>
                     <dl class="time1" style="display:">
                         <dt><a class="t" href="#">
-                                <div class="num">1</div><%= dataSet.daum.related[0] %>
+                                <div class="num">1</div>
+                                <%= dataSet.daum.related[0] %>
                             </a></dt>
                         <dt><a class="t" href="#">
-                                <div class="num">2</div><%= dataSet.daum.related[1] %>
+                                <div class="num">2</div>
+                                <%= dataSet.daum.related[1] %>
                             </a></dt>
                         <dt><a class="t" href="#">
-                                <div class="num">3</div><%= dataSet.daum.related[2] %>
+                                <div class="num">3</div>
+                                <%= dataSet.daum.related[2] %>
                             </a></dt>
                         <dt><a class="t" href="#">
-                                <div class="num">4</div><%= dataSet.daum.related[3] %>
+                                <div class="num">4</div>
+                                <%= dataSet.daum.related[3] %>
                             </a></dt>
                         <dt><a class="t" href="#">
-                                <div class="num">5</div><%= dataSet.daum.related[4] %>
+                                <div class="num">5</div>
+                                <%= dataSet.daum.related[4] %>
                             </a></dt>
                     </dl>
-                        
                     <dl class="time2" style="display:none;">
                         <dt><a class="t" href="#">
-                                <div class="num">6</div><%= dataSet.daum.related[5] %>
+                                <div class="num">6</div>
+                                <%= dataSet.daum.related[5] %>
                             </a></dt>
                         <dt><a class="t" href="#">
-                                <div class="num">7</div><%= dataSet.daum.related[6] %>
+                                <div class="num">7</div>
+                                <%= dataSet.daum.related[6] %>
                             </a></dt>
                         <dt><a class="t" href="#">
-                                <div class="num">8</div><%= dataSet.daum.related[7] %>
+                                <div class="num">8</div>
+                                <%= dataSet.daum.related[7] %>
                             </a></dt>
                         <dt><a class="t" href="#">
-                                <div class="num">9</div><%= dataSet.daum.related[8] %>
+                                <div class="num">9</div>
+                                <%= dataSet.daum.related[8] %>
                             </a></dt>
                         <dt><a class="t" href="#">
-                                <div class="num">10</div><%= dataSet.daum.related[9] %>
+                                <div class="num">10</div>
+                                <%= dataSet.daum.related[9] %>
                             </a></dt>
                     </dl>
                 </li>
@@ -308,11 +312,10 @@
                     <a class="best_add ad1" style="cursor:pointer;" onClick="javascript:view('0')">></a>
                     <a class="best_add ad2" onClick="javascript:view('1')" style="display:none;cursor:pointer; ">></a>
                     <a class="best_add ad3" onClick="javascript:view('2')" style="display:none;cursor:pointer; ">></a>
-                    </li> 
-                </ul> 
-            </div> 
-        </div> 
-
+                </li>
+            </ul>
+        </div>
+    </div>
     <!-- 상단 메뉴바 -->
     <section class="menu cid-rx3IEQFgmC" once="menu" id="menu04-a0" data-sortbtn="btn-primary">
         <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg" id="navbar">
@@ -344,40 +347,36 @@
             </div>
             <!--TAB2-->
             <div id="tab-2" class="tab-content2">
-            <form id='date_form' method='get' action='/showResults' class="collapse navbar-collapse">
+                <form id='date_form' method='get' action='/showResults' class="collapse navbar-collapse">
                     <input type="hidden" name="keyword" value="<%= keyword%>">
-                    <input placeholder="시작 날짜" type="text" id="startDate" name="startDate" value="" class="form-control display-7" style="width: 35%; display: inline;"/>&nbsp;&nbsp;~&nbsp;&nbsp;
-                    <input placeholder="종료 날짜" type="text" id="endDate" name="endDate" value="" class="form-control display-7" style="width: 35%; display: inline;"/>
-            
-                <div class="icons-menu">
-                <a href="javascript:{}" onclick="document.getElementById('date_form').submit();">
-                    <span class="p-2 mbr-iconfont mobi-mbri-search mobi-mbri" style="color: rgb(87, 70, 139); fill: rgb(87, 70, 139);"></span>
-                </a>
-                </div>
-            </form>
+                    <input placeholder="시작 날짜" type="text" id="startDate" name="startDate" value="" class="form-control display-7" style="width: 35%; display: inline;" />&nbsp;&nbsp;~&nbsp;&nbsp;
+                    <input placeholder="종료 날짜" type="text" id="endDate" name="endDate" value="" class="form-control display-7" style="width: 35%; display: inline;" />
+                    <div class="icons-menu">
+                        <a href="javascript:{}" onclick="document.getElementById('date_form').submit();">
+                            <span class="p-2 mbr-iconfont mobi-mbri-search mobi-mbri" style="color: rgb(87, 70, 139); fill: rgb(87, 70, 139);"></span>
+                        </a>
+                    </div>
+                </form>
                 <!-- DateTimePicker 위젯를 적용하기 위한 TextBox를 선언한다. -->
                 <!-- </div> -->
                 <!-- 여기 아래로 nav bar 하단에 들어갈 연관 검색어 들어감 -->
                 <!-- 연관검색어는 탭에 상관없이 들어감 -->
             </div>
-            
             <!--TAB3-->
             <div id="tab-3" class="tab-content2">
-            <form id='compare_form' method='get' action='/compareKeywords' class="collapse navbar-collapse">
+                <form id='compare_form' method='get' action='/compareKeywords' class="collapse navbar-collapse">
                     <input disabled id="keyword" type="text" name="keyword" placeholder="keyword" data-form-field="keyword" class="form-control display-7" value="<%= keyword %>" id="keyword-formbuilder-2" style="margin-right:10px;">
                     <input id="compareKeyword" type="text" name="compare" placeholder="+ 비교" class="form-control display-7" value="" id="keyword-formbuilder-3">
-                <div class="icons-menu">
-                <a href="javascript:{}" onclick="document.getElementById('compare_form').submit();">
-                    <span class="p-2 mbr-iconfont mobi-mbri-search mobi-mbri" style="color: rgb(87, 70, 139); fill: rgb(87, 70, 139);"></span>
-                </a>
-                </div>
-            </form>
+                    <div class="icons-menu">
+                        <a href="javascript:{}" onclick="document.getElementById('compare_form').submit();">
+                            <span class="p-2 mbr-iconfont mobi-mbri-search mobi-mbri" style="color: rgb(87, 70, 139); fill: rgb(87, 70, 139);"></span>
+                        </a>
+                    </div>
+                </form>
             </div>
-            
         </nav>
     </section>
-
-      <!-- 좌측 툴바 
+    <!-- 좌측 툴바 
        <section class="menu cid-rx3IEQFgmC" once="menu" id="menubarsection" data-sortbtn="btn-primary" style="background-color: #212529;">
         <ul class="sidebar navbar-nav">
             <li class="nav-item active">
@@ -392,7 +391,7 @@
                     <span>검색어 비교</span>
                 </a>
             </li>-->
-            <!--
+    <!--
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-fw fa-folder"></i>
@@ -404,7 +403,7 @@
                     <<div class="dropdown-divider"></div> 
                 </div>
             </li> -->
-            <!--  <img src="assets/images/JJTECH.png" alt="" title="" style="width: 50%;height:50%">
+    <!--  <img src="assets/images/JJTECH.png" alt="" title="" style="width: 50%;height:50%">
             <li class="nav-item">
                                         <a class="nav-link" href="charts.html">
                                             <i class="fas fa-fw fa-chart-area"></i>
@@ -417,7 +416,6 @@
                                     </li> 
         </ul>
     </section>-->
-
     <!-- 그래프및 메인 화면 -->
     <!-- 중앙 큰 섹션 -->
     <section id="rightsection">
@@ -431,7 +429,7 @@
                             <div id="box">
                                 <div id="summary" style="width:100%;"></div>
                                 <script>
-                                var array = [];
+                                    var array = [];
                                 <%
                                     array = dataSet.naver.graphData.period;
                                     array.forEach(function (item, index, array) {
@@ -444,27 +442,29 @@
                                 var naver = {
                                     x: [<%- array %>], // 기간
                                     y: [<%= dataSet.naver.graphData.count %>], // 검색량
-                                    mode: 'lines+markers',
+                                    mode: 'lines',
                                     type: 'scatter',
                                     name: 'naver',
                                     line: {color: '#3EAF0E'}
                                 };
                                     
-                                var garray = [];
-                                var gTrend_abs = [];
+                                
                                 <%
+                                    var garray = [];
                                     garray = dataSet.google.graphData.period;
                                     garray.forEach(function (item, index, array) {
                                         garray[index] = "\'"+ item + "\'"; // 정말 정말 중요! '를 붙여줌 흑흑,,
                                     });
                                     
 
-                                    var onePercent = dataSet.naver.graphData.count[0] / dataSet.google.graphData.count[0];   
-                                    gTrend_abs = dataSet.google.graphData.count;
+                                    var onePercent = dataSet.naver.graphData.count[0] / dataSet.google.graphData.count[0];
+                                    var gTrend_abs = dataSet.google.graphData.count;
+                                    //gTrend_abs = dataSet.google.graphData.count;
                                     gTrend_abs.forEach(function (item, index, array) {
                                            gTrend_abs[index] =  item * onePercent; 
-                                    });   
-                                console.log(gTrend_abs);
+                                    });
+                                    console.log(gTrend_abs);
+                               
                                 %>
                                     
                                 //var summary_data = [naver];
@@ -473,8 +473,8 @@
                                     
                                 var google = {
                                     x: [<%- garray  %>], // 기간
-                                    y: [<%= dataSet.google.graphData.count %>], // 검색량
-                                    mode: 'lines+markers',
+                                    y: [<%= gTrend_abs %>], // 검색량
+                                    mode: 'lines',
                                     type: 'scatter',
                                     name: 'google',
                                     line: {color: '#4285F4'}
@@ -482,7 +482,6 @@
                                 
                                 var summary_data = [naver, google];
                                 Plotly.newPlot(summary, summary_data);
-                                </script>
                                 </script>
                             </div>
                         </div>
@@ -500,34 +499,36 @@
                             <li class="nav-item first"><a class="nav-link mbr-fonts-style active display-7" role="tab" data-toggle="tab" href="#tabs02-96_tab0" aria-selected="true">네이버</a></li>
                             <li class="nav-item"><a class="nav-link mbr-fonts-style active display-7" role="tab" data-toggle="tab" href="#tabs02-96_tab1" aria-selected="true">구글</a></li>
                         </ul>
+
                         <div class="tab-content">
-                            
                             <div id="tab1" class="tab-pane in active" role="tabpanel">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <p class="mbr-text pt-4 mbr-fonts-style display-7">
-                                    <!--    <div>
-                                            <div id="naver_trend" style="width:70%;"></div>
-                                            <script>
-                                            naver_trend = document.getElementById('naver_trend');
-                                            Plotly.newPlot(naver_trend, [naver]);
-                                            </script>
-                                        
-                                            <div id="naver_specific" style="width:30%;"></div>
-                                            <script>
-                                            naver_specific = document.getElementById('naver_specific');
-                                            var data = [{
-                                              values: [<%= dataSet.naver.searchword[0] %>, <%= dataSet.naver.searchword[1] %>],
-                                              labels: ['PC', 'mobile'],
-                                              type: 'pie'
-                                            }];
-                                            var layout = {
-                                              title: '<%= keyword %> 의 월간 검색 수'
-                                            };
-                                            Plotly.newPlot('naver_specific', data, layout, {showSendToCloud:true});
-                                            </script>
-                                        </div> -->                                        
-                                            <input class="btn btn-primary" id='graphChange' type="button" value="펼쳐서 보기" style="padding:0.2rem; position: relative; left: 90%;">
+                                            <div>
+                                                <div id="naver_trend" style="width:70%;"></div>
+                                                <script>
+                                                var naver_lm = naver;
+                                                naver_lm.mode = 'lines+markers';
+                                                Plotly.newPlot('naver_trend', [naver_lm]); 
+                                                /* naver_trend = document.getElementById('naver_trend'); 한 뒤, 
+                                                naver_trend 변수를 첫 매개 변수로 넣는 것과 동치 */
+                                                </script>
+                                                <div id="naver_specific" style="width:30%;"></div>
+                                                <script>
+                                                naver_specific = document.getElementById('naver_specific');
+                                                var data_ns = [{
+                                                  values: [<%= dataSet.naver.searchword[0] %>, <%= dataSet.naver.searchword[1] %>],
+                                                  labels: ['PC', 'mobile'],
+                                                  type: 'pie'
+                                                }];
+                                                var layout_ns = {
+                                                  title: '<%= keyword %> 의 월간 검색 수'
+                                                };
+                                                Plotly.newPlot('naver_specific', data_ns, layout_ns, {showSendToCloud:true});
+                                                </script>
+                                            </div>
+                                            <input class="btn btn-primary" id='naver_graphChange' type="button" value="펼쳐서 보기" style="padding:0.2rem; position: relative; left: 90%;">
                                             <div id="naverKeyword" style="width:100%;"></div>
                                             <% 
                                                 var pcNaver = [];
@@ -549,7 +550,7 @@
                                                 });
                                             %>
                                             <script>
-                                            naver_id = document.getElementById('naverKeyword');
+                                                naver_id = document.getElementById('naverKeyword');
                                             var Mobile = {
                                               x: [<%- relatedKeys %>], //keyword set
                                               y: [<%= mobileNaver %>],
@@ -572,45 +573,73 @@
                                             var M_PC_data = [PC, Mobile];
                                             var layout = {barmode: 'stack'};
                                             Plotly.newPlot(naver_id, M_PC_data, layout);
-                                            </script> 
+                                            </script>
                                         </p>
                                     </div>
                                 </div>
                             </div>
-                        
+
                             <div id="tab2" class="tab-pane in active" role="tabpanel">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <p class="mbr-text pt-4 mbr-fonts-style display-7">
-                                        <div>
                                             <div id="google_trend" style="width:70%;"></div>
                                             <script>
-                                            Plotly.newPlot('google_trend', [google]);
+                                            var google_lm = google;
+                                            google_lm.mode = 'lines+markers';
+                                            Plotly.newPlot('google_trend', [google_lm]);
                                             </script>
-                                        <!--
-                                            <div id="google_specific" style="width:30%;"></div>
+                                            <input class="btn btn-primary" id='google_graphChange' type="button" value="급상승 연관 검색어 보기" style="padding:0.2rem; position: relative; left: 90%;">
+                                            <div id="googleKeyword" style="width:100%;"></div>
+                                            <%
+                                            var g_relatedKeys_t = dataSet.google.related.top.relatedKeyword;
+                                            var g_relatedKeys_r = dataSet.google.related.rising.relatedKeyword;
+                                            g_relatedKeys_t.forEach(function (item, index, array) {
+                                                array[index] = "\'"+ item + "\'"; // 정말 정말 중요! '를 붙여줌 흑흑,,
+                                            });
+                                            g_relatedKeys_r.forEach(function (item, index, array) {
+                                                array[index] = "\'"+ item + "\'"; // 정말 정말 중요! '를 붙여줌 흑흑,,
+                                            });
+                                            %>
                                             <script>
-                                            naver_specific = document.getElementById('naver_specific');
-                                            var data = [{
-                                              values: [<%= dataSet.naver.searchword[0] %>, <%= dataSet.naver.searchword[1] %>],
-                                              labels: ['PC', 'mobile'],
-                                              type: 'pie'
-                                            }];
-                                            var layout = {
-                                              title: '<%= keyword %> 의 월간 검색 수'
+                                            var x_t = [<%- g_relatedKeys_t %>];
+                                            var y_t = [<%= dataSet.google.related.top.rate %>];
+                                            var x_r = [<%- g_relatedKeys_r %>];
+                                            var y_r = [<%= dataSet.google.related.rising.rate %>];
+
+                                            var layout_gk = {
+                                                font: {
+                                                    family: 'Raleway, sans-serif'
+                                                },
+                                                yaxis: {
+                                                    ticksuffix: '%',
+                                                   // range: [0, 100] 굳이 없어도 잘 작동함
+                                                },
+                                                showlegend: false,
+                                                bargap: 0.05
                                             };
-                                            Plotly.newPlot('naver_specific', data, layout, {showSendToCloud:true});
+                                            
+                                            var data = [{
+                                                x: x_t,
+                                                y: y_t,
+                                                type: 'bar',
+                                                marker: {
+                                                    color: 'rgb(142,124,195)',
+                                                }
+                                            }];
+                                            
+                                            
+                                            Plotly.newPlot('googleKeyword', data, layout_gk);
                                             </script>
-                                        </div> -->
                                         </p>
                                     </div>
                                 </div>
                             </div>
+
+                        </div>
                     </div>
                 </div>
-            </div>
         </section>
-    </section>
     <!-- 하단 메뉴 바
     <section once="" class="cid-rEoHegd1JZ" id="footer01-0" data-sortbtn="btn-primary">
         <div class="container">
@@ -642,8 +671,6 @@
 
 </html>
 <script>
-        
-
 //맨위 검색창 탭 선택
 $(document).ready(function() {
 
@@ -656,9 +683,9 @@ $(document).ready(function() {
         $(this).addClass('current'); //현재 선택된 것 추가
         $("#" + tab_id).addClass('current');
     })
-    
+
     // document.body.style.zoom ="0.8";
-    
+
     // 선언한 TextBox에 DateTimePicker 위젯을 적용한다.
     $('#startDate').datetimepicker({
         language: 'ko', // 화면에 출력될 언어를 한국어로 설정한다.
@@ -677,21 +704,20 @@ $(document).ready(function() {
     });
 
 })
-    
-    
 
-    function view(arg) {
-        $(".time1, .time2, .ad1, .ad2").css("display", "none");
-        // $(".time1, .time2, .time3, .time4, .ad1, .ad2, .ad3, .ad4").css("display", "none");
-        if (arg == "0") {
-            $(".time2, .ad2").css("display", "block");
-            viewcount = 1;
-        }
-        else if (arg == "1") {
-            $(".time1, .ad1").css("display", "block");
-            viewcount = 0;
-        }
+
+
+function view(arg) {
+    $(".time1, .time2, .ad1, .ad2").css("display", "none");
+    // $(".time1, .time2, .time3, .time4, .ad1, .ad2, .ad3, .ad4").css("display", "none");
+    if (arg == "0") {
+        $(".time2, .ad2").css("display", "block");
+        viewcount = 1;
+    } else if (arg == "1") {
+        $(".time1, .ad1").css("display", "block");
+        viewcount = 0;
     }
+}
 var viewcount = 0;
 var rtcarousel = setInterval(function() { view(viewcount) }, 3000);
 
@@ -703,28 +729,34 @@ $("#best_search").mouseleave(function() {
     rtcarousel = setInterval(function() { view(viewcount) }, 3000);
 });
 </script>
-
-        
 <script type="text/javascript">
-  $(document).ready(function(){
-      
-      $(document).on("click","#graphChange",function(event){ //graph 바뀜
-        var layout2 = {barmode: 'group'};  
-        if(layout.barmode == layout2.barmode)
-        {
-            layout = {barmode: 'stack'}; 
-            document.getElementById("graphChange").value = "펼쳐서 보기";
-        }                 
-        else
-        {
-            layout = layout2; 
-            document.getElementById("graphChange").value = "합쳐서 보기"; 
+$(document).ready(function() {
+
+    $(document).on("click", "#naver_graphChange", function(event) { //graph 바뀜
+        var layout2 = { barmode: 'group' };
+        if (layout.barmode == layout2.barmode) {
+            layout = { barmode: 'stack' };
+            document.getElementById("naver_graphChange").value = "펼쳐서 보기";
+        } else {
+            layout = layout2;
+            document.getElementById("naver_graphChange").value = "합쳐서 보기";
         }
-            
-            
         Plotly.newPlot(naver_id, M_PC_data, layout);
-      });
-  });// end of ready()
-
+    });
+    
+    $(document).on("click", "#google_graphChange", function(event) { //graph 바뀜
+        if (data[0].x == x_r) {
+            data[0].x = x_t;
+            data[0].y = y_t;
+            document.getElementById("google_graphChange").value = "급상승 연관 검색어 보기";
+            
+        } else {
+            data[0].x = x_r;
+            data[0].y = y_r;
+            document.getElementById("google_graphChange").value = "인기 연관 검색어 보기";     
+        }
+        Plotly.newPlot('googleKeyword', data, layout_gk);
+    });
+    
+}); // end of ready()
 </script>
-

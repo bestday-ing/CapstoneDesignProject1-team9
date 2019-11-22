@@ -170,7 +170,8 @@ var AnswerPermissions = function(keyword, startDate, endDate) {
                 trendobj = JSON.parse(res);
 
                 var top = trendobj['default']['rankedList'][0]['rankedKeyword']; // query랑 value만 얻어오면 됨 (sorting 되어 있음)
-                var rising = trendobj['default']['rankedList'][1]['rankedKeyword']; // query formattedValue (breakout이면 급상승), 그 외는 수치 
+                var rising = trendobj['default']['rankedList'][1]['rankedKeyword']; // query value(단위 %) (breakout이면 급상승), 그 외는 수치 
+
                 var googleTop_related = [];
                 var googleTop_rate = [];
                 var googleRising_related = [];
@@ -183,7 +184,7 @@ var AnswerPermissions = function(keyword, startDate, endDate) {
 
                 for (var i = 0; i < rising.length; i++) {
                     googleRising_related.push(rising[i].query);
-                    googleRising_rate.push(rising[i].formattedValue);
+                    googleRising_rate.push(rising[i].value);
                 }
 
 

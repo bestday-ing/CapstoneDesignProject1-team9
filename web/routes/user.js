@@ -275,6 +275,7 @@ this.get_nTrend_crawling_Data = function(callback) {
                 //해당 사이트로 간다
                 await page.goto('http://surffing.net/');
                 //입력상자에 값넣기
+                await page.waitFor(2000);
                 await page.evaluate((id) => {
                     document.querySelector('#saerchKeyword').value = id;
                     // document.querySelector('#pw').value = pw;

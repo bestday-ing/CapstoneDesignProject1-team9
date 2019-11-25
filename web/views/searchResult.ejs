@@ -254,57 +254,59 @@
 </head>
 
 <body>
-    <!-- 연관 검색어 팝업창 -->
+    <!-- 연관 검색어 팝업창 --> 
+    <!-- 이 부분 수정 필요함 지금은 임의로 하나 하나 넣어뒀지만, 
+    나중에 배열에 값이 없게 되는 경우 즉 충분히 연관 검색어가 없는 경우에는 에러가 날 것이기 때문 -->
     <div id="wrap">
         <div class="container">
             <ul id="best_search">
                 <li>
-                    <p>연관검색어</p>
+                    <p>인기 급상승 검색어</p>
                 </li>
                 <li>
                 <li>
                     <dl class="time1" style="display:">
                         <dt><a class="t" href="#">
                                 <div class="num">1</div>
-                                <%= dataSet.daum.related[0] %>
+                                <%= dataSet.google.related.rising.relatedKeyword[0] %>
                             </a></dt>
                         <dt><a class="t" href="#">
                                 <div class="num">2</div>
-                                <%= dataSet.daum.related[1] %>
+                                <%= dataSet.google.related.rising.relatedKeyword[1] %>
                             </a></dt>
                         <dt><a class="t" href="#">
                                 <div class="num">3</div>
-                                <%= dataSet.daum.related[2] %>
+                                <%= dataSet.google.related.rising.relatedKeyword[2] %>
                             </a></dt>
                         <dt><a class="t" href="#">
                                 <div class="num">4</div>
-                                <%= dataSet.daum.related[3] %>
+                                <%= dataSet.google.related.rising.relatedKeyword[3] %>
                             </a></dt>
                         <dt><a class="t" href="#">
                                 <div class="num">5</div>
-                                <%= dataSet.daum.related[4] %>
+                                <%= dataSet.google.related.rising.relatedKeyword[4] %>
                             </a></dt>
                     </dl>
                     <dl class="time2" style="display:none;">
                         <dt><a class="t" href="#">
                                 <div class="num">6</div>
-                                <%= dataSet.daum.related[5] %>
+                                <%= dataSet.google.related.rising.relatedKeyword[5] %>
                             </a></dt>
                         <dt><a class="t" href="#">
                                 <div class="num">7</div>
-                                <%= dataSet.daum.related[6] %>
+                                <%= dataSet.google.related.rising.relatedKeyword[6] %>
                             </a></dt>
                         <dt><a class="t" href="#">
                                 <div class="num">8</div>
-                                <%= dataSet.daum.related[7] %>
+                                <%= dataSet.google.related.rising.relatedKeyword[7] %>
                             </a></dt>
                         <dt><a class="t" href="#">
                                 <div class="num">9</div>
-                                <%= dataSet.daum.related[8] %>
+                                <%= dataSet.google.related.rising.relatedKeyword[8] %>
                             </a></dt>
                         <dt><a class="t" href="#">
                                 <div class="num">10</div>
-                                <%= dataSet.daum.related[9] %>
+                                <%= dataSet.google.related.rising.relatedKeyword[9] %>
                             </a></dt>
                     </dl>
                 </li>

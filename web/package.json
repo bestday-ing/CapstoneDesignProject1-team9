@@ -6,15 +6,27 @@
     "start": "node app.js"
   },
   "dependencies": {
+    "async": "^3.1.0",
+    "babel-runtime": "^6.26.0",
     "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.3",
+    "ejs": "^3.0.1",
     "errorhandler": "^1.4.3",
     "express": "^4.14.0",
     "express-error-handler": "^1.1.0",
-    "express-session": "^1.14.2",
+    "express-session": "^1.17.0",
     "google-trends-api": "^4.9.0",
+    "iconv": "^2.3.5",
+    "inko": "^1.1.1",
+    "jschardet": "^2.1.1",
+    "moment": "^2.24.0",
     "mongoose": "^5.7.5",
+    "pandas-js": "^0.2.4",
+    "puppeteer": "^2.0.0",
     "python-shell": "^1.0.8",
-    "serve-static": "^1.11.2"
+    "request": "^2.88.0",
+    "serve-static": "^1.11.2",
+    "session-file-store": "^1.3.1",
+    "sessionstorage": "^0.1.0"
   }
 }

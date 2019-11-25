@@ -1,10 +1,11 @@
+
 // nodejs 크롤링을 위한 모듈
 const puppeteer = require('puppeteer');
-(async () => {
+async function get_abs_value_and_related_keywords_naver (searchword) {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   //키워드값 넣는곳
-  const keyword = "치킨";
+  const keyword = searchword;
   //해당 사이트로 간다
   await page.goto('http://surffing.net/');
   //입력상자에 값넣기
@@ -61,11 +62,25 @@ const puppeteer = require('puppeteer');
 
     relatedKeywords[bufferKey] = [bufferPC, bufferM]
     }
-    console.log(publishVolumes);
-    console.log(relatedKeywords);
+
 
   //screenshot찍어서 나옴, 테스트용, 지워도됨
   await page.screenshot({ path: 'surffing.png', fullPage:true });
   //browser 종료, 지우면 안됨
   await browser.close();
-})();
+  var returnNaverValue = {
+    RK: relatedKeywords,
+    PV: publishVolumes
+  };
+  console.log(returnNaverValue['RK']);
+console.log(returnNaverValue['PV']);
+  return returnNaverValue;
+}
+
+
+
+
+
+
+// 테스트용 실행
+get_abs_value_and_related_keywords_naver("치킨");

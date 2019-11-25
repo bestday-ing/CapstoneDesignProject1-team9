@@ -16,7 +16,7 @@ def search_naver(searchword, StartDate, EndDate):
     Keyword = searchword
     # "pc" or "mo" or 비워두면("") 둘다
     DeviceType = ""
-    FullDatalist = naverAPI_section_search(StartDate, FindRecentMonth(), Keyword, DeviceType)
+    FullDatalist = naverAPI_section_search(StartDate, FindRecentMonth(), Keyword, DeviceType) # 배열
     # 실제 최근 1달 검색량은 나중에 구하는 것으로 (현재는 데이터가 없어서 1000으로 둠)
 
     rk, pb = get_abs_value_and_related_keywords_naver(Keyword)  # 둘 다 dictionary
@@ -134,7 +134,7 @@ if __name__ == '__main__':
     final = {}
     final["daum"] = search_daum(keyword)
     final["naver"] = search_naver(keyword, startDate, endDate)
-    final["google"] = search_google(keyword)
+    final["google"] = {}
     final_json_str = json.dumps(final)
     print(final_json_str)
     

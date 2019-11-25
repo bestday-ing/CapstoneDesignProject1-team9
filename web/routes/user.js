@@ -64,14 +64,15 @@ function check_params (params)
 {
     if(params[1] == undefined ) //startDate
     {
-        params[1] = oneYearsAgo();      
+        params[1] = oneYearsAgo(); 
+
     }
     
     if(params[2] == undefined ) //endDate
     {
         params[2] = FindRecentMonth();      
     }
-    
+    console.log(params);
     return params;
 }
 
@@ -453,7 +454,7 @@ this.get_nTrend_crawling_Data = function(callback) {
                 "keywordGroups": [{
                     "groupName": " ",
                     "keywords": [
-                        "치킨"
+                        keyword
                     ]
                 }],
                 "device": "pc",

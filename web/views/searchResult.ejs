@@ -378,46 +378,7 @@
             </div>
         </nav>
     </section>
-    <!-- 좌측 툴바 
-       <section class="menu cid-rx3IEQFgmC" once="menu" id="menubarsection" data-sortbtn="btn-primary" style="background-color: #212529;">
-        <ul class="sidebar navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="searchResult.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>연관 검색어 분석</span>
-                </a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="/loadComparePage">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>검색어 비교</span>
-                </a>
-            </li>-->
-    <!--
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                    ] <h6 class="dropdown-header">Login Screens:</h6> 
-                    <a class="dropdown-item" href="Compare.html" style="height:10%;width:200%;">KeywordCompare</a>
-                    <<div class="dropdown-divider"></div> 
-                </div>
-            </li> -->
-    <!--  <img src="assets/images/JJTECH.png" alt="" title="" style="width: 50%;height:50%">
-            <li class="nav-item">
-                                        <a class="nav-link" href="charts.html">
-                                            <i class="fas fa-fw fa-chart-area"></i>
-                                            <span>Charts</span></a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="tables.html">
-                                            <i class="fas fa-fw fa-table"></i>
-                                            <span>Tables</span></a>
-                                    </li> 
-        </ul>
-    </section>-->
+
     <!-- 그래프및 메인 화면 -->
     <!-- 중앙 큰 섹션 -->
     <section id="rightsection">
@@ -426,8 +387,8 @@
                 <div class="row">
                     <div class="col-12 col-md-12">
                         <div class="section-head text-center space30">
-                            <br><br>
-                            <h2 class="mbr-section-title mbr-fonts-style display-2">Summary Chart</h2>
+                            <br><br><br><br>
+                            <h2 class="mbr-section-title mbr-fonts-style display-2">시간 흐름에 따른 관심도 변화</h2>
                             <div id="box">
                                 <div id="summary" style="width:100%;"></div>
                                 <script>
@@ -497,17 +458,18 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-md-12">
+                       <h2 >사이트별 그래프</h2>
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item first"><a class="nav-link mbr-fonts-style active display-7" role="tab" data-toggle="tab" href="#tabs02-96_tab0" aria-selected="true">네이버</a></li>
                             <li class="nav-item"><a class="nav-link mbr-fonts-style active display-7" role="tab" data-toggle="tab" href="#tabs02-96_tab1" aria-selected="true">구글</a></li>
                         </ul>
 
-                        <div class="tab-content">
+                        <div class="tab-content" >
                             <div id="tab1" class="tab-pane in active" role="tabpanel">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <p class="mbr-text pt-4 mbr-fonts-style display-7">
-                                            <div>
+                                            <div class = "detailes" style ="display : flex;">
                                                 <div id="naver_trend" style="width:70%;"></div>
                                                 <script>
                                                 var naver_lm = naver;
@@ -530,7 +492,9 @@
                                                 Plotly.newPlot('naver_specific', data_ns, layout_ns, {showSendToCloud:true});
                                                 </script>
                                             </div>
+                                            
                                             <input class="btn btn-primary" id='naver_graphChange' type="button" value="펼쳐서 보기" style="padding:0.2rem; position: relative; left: 90%;">
+                                            <h2 style= "width: fit-content;">&nbsp;&nbsp;&nbsp;연관검색어 그래프</h2>
                                             <div id="naverKeyword" style="width:100%;"></div>
                                             <% 
                                                 var pcNaver = [];
@@ -591,7 +555,9 @@
                                             google_lm.mode = 'lines+markers';
                                             Plotly.newPlot('google_trend', [google_lm]);
                                             </script>
+                                            
                                             <input class="btn btn-primary" id='google_graphChange' type="button" value="급상승 연관 검색어 보기" style="padding:0.2rem; position: relative; left: 90%;">
+                                            <h2 style= "width: fit-content;">&nbsp;&nbsp;&nbsp;연관검색어 그래프</h2>
                                             <div id="googleKeyword" style="width:100%;"></div>
                                             <%
                                             var g_relatedKeys_t = dataSet.google.related.top.relatedKeyword;
@@ -603,6 +569,7 @@
                                                 array[index] = "\'"+ item + "\'"; // 정말 정말 중요! '를 붙여줌 흑흑,,
                                             });
                                             %>
+                                            
                                             <script>
                                             var x_t = [<%- g_relatedKeys_t %>];
                                             var y_t = [<%= dataSet.google.related.top.rate %>];
@@ -642,18 +609,6 @@
                     </div>
                 </div>
         </section>
-    <!-- 하단 메뉴 바
-    <section once="" class="cid-rEoHegd1JZ" id="footer01-0" data-sortbtn="btn-primary">
-        <div class="container">
-            <div class="media-container-row align-center mbr-white">
-                <div class="col-12">
-                    <p class="mbr-text mb-0 mbr-fonts-style display-4">
-                        © Copyright 2019 Mobirise - All Rights Reserved
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section> -->
     <script src="../public/assets/web/assets/jquery/jquery.min.js"></script>
     <script src="../public/assets/popper/popper.min.js"></script>
     <script src="../public/assets/tether/tether.min.js"></script>

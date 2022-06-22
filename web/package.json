@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/bestday-ing/CapstoneDesignProject1-team9#readme",
   "dependencies": {
-    "async": "^3.1.0",
+    "async": "^3.2.2",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.4",
     "ejs": "^3.0.1",
